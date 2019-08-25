@@ -248,35 +248,50 @@ namespace Tetris
                 }
             }
             else
-                player.velocity.X = 0f;
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && hasJumped == false)
+                player.velocity.X = 0;
+            player.position.X += player.velocity.X;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
-                player.position.Y -= jumpStrength;
-                player.velocity.Y = -5f;
-                hasJumped = true;
-                falling = true;
+                if (player.IsColliding(nextPosition, gameBoard) == false && hasJumped == false)
+                {
+                    player.position.Y -= jumpStrength;
+                    player.velocity.Y = -5f;
+                    hasJumped = true;
+                }
+                else if (player.IsColliding(nextPosition, gameBoard) == true)
+                {
+                    player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
+                    player.velocity.Y = 0;
+                }
             }
 
-            if (falling == true)
+            temptVelocity.Y = player.velocity.Y + gravity;
+            nextPosition = new Vector2(player.position.X, player.position.Y + temptVelocity.Y);
+            // Console.WriteLine(nextPosition);
+            if (player.IsColliding(nextPosition, gameBoard) == false)
             {
-                player.velocity.Y += gravity;
-                nextPosition = new Vector2(player.position.X, player.position.Y + player.velocity.Y);
+                player.velocity.Y = temptVelocity.Y;
             }
+            else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y < 0)
+            {
+                player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
+                player.velocity.Y = 0;
+            }
+            else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y > 0)
+            {
+                hasJumped = false;
+                player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32 - 64;
+                player.velocity.Y = 0;
+            }
+            player.position.Y += player.velocity.Y;
 
             if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
             {
-                falling = false;
                 hasJumped = false;
                 player.position.Y = 936;
             }
-
-            if (falling == false)
-            {
-                player.velocity.Y = 0f;
-            }
-            player.position += player.velocity;
-            // Console.WriteLine(nextPosition);
 
             base.Update(gameTime);
         }
