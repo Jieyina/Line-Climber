@@ -57,6 +57,8 @@ namespace Tetris
         float gravity = 0.4f;
         bool hasJumped;
         bool falling;
+        Vector2 temptVelocity;
+        Vector2 nextPosition;
 
         public Game1()
         {
@@ -194,16 +196,6 @@ namespace Tetris
                     currentTetromino?.Rotate(1); // clock wise rotation
                     lastActionTime = gameTime.TotalGameTime.TotalMilliseconds;
                 }
-                // -----------------------------------------
-                // Teleportation to ghost position
-                // -----------------------------------------
-                /* if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                {
-                    currentTetromino?.MoveTo(currentTetromino.Xghost, currentTetromino.Yghost);
-                    if (currentTetromino != null)
-                        currentTetromino.IsFalling = false;
-                    lastActionTime = gameTime.TotalGameTime.TotalMilliseconds;
-                } */
             }
 
             currentTetromino?.Update(gameTime);
@@ -211,7 +203,7 @@ namespace Tetris
             if (currentTetromino != null && !currentTetromino.IsFalling)
             {
                 // If the tetromino is outside 
-                if (currentTetromino.Y >= 20)
+                if (currentTetromino.Y >= 22)
                     GameOver = true;
           
                 // Get the row to remove
@@ -226,30 +218,40 @@ namespace Tetris
             }
 
             // player movement
-            Console.WriteLine(player.IsColliding(player.nextPosition, gameBoard));
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                if (player.IsColliding(player.nextPosition, gameBoard) == false && player.position.X < 538)
+                temptVelocity.X = speed;
+                nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
+                if (player.IsColliding(nextPosition, gameBoard) == false && player.position.X < 538)
                 {
-                    player.velocity.X = speed;
-                    player.nextPosition = new Vector2(player.position.X + player.velocity.X, player.position.Y);
+                    player.velocity.X = temptVelocity.X;
                 }
-                else if (player.IsColliding(player.nextPosition, gameBoard) == true)
+                else if (player.IsColliding(nextPosition, gameBoard) == true)
                 {
                     player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 - 32;
                     player.velocity.X = 0;
                 }
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A) && player.position.X > 250)
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                player.velocity.X = -speed;
-                player.nextPosition = new Vector2(player.position.X + player.velocity.X, player.position.Y);
+                temptVelocity.X = -speed;
+                nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
+                Console.WriteLine(player.IsColliding(nextPosition, gameBoard));
+                if (player.IsColliding(nextPosition, gameBoard) == false && player.position.X > 250)
+                {
+                    player.velocity.X = temptVelocity.X;
+                }
+                else if (player.IsColliding(nextPosition, gameBoard) == true)
+                {
+                    player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 + 32;
+                    player.velocity.X = 0;
+                }
             }
             else
                 player.velocity.X = 0f;
             if (Keyboard.GetState().IsKeyDown(Keys.W) && hasJumped == false)
             {
-                player.nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
+                nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
                 player.position.Y -= jumpStrength;
                 player.velocity.Y = -5f;
                 hasJumped = true;
@@ -259,7 +261,7 @@ namespace Tetris
             if (falling == true)
             {
                 player.velocity.Y += gravity;
-                player.nextPosition = new Vector2(player.position.X, player.position.Y + player.velocity.Y);
+                nextPosition = new Vector2(player.position.X, player.position.Y + player.velocity.Y);
             }
 
             if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
@@ -320,7 +322,7 @@ namespace Tetris
 
         public Tetromino GenerateNewTetromino(char name)
         {
-            int x = 5, y = 20;
+            int x = 5, y = 22;
             return new Tetromino(gameBoard, x, y, name, BlockTextures[name]);
         }
 
@@ -346,13 +348,6 @@ namespace Tetris
                 Color.GreenYellow);
         }
 
-        /* public bool collideBelow(Vector2 position, Block Block)
-        {
-            if (player.IsColliding(player.nextPosition, gameBoard) == true && player.velocity.Y > 0)
-                return true;
-            else
-                return false;
-        } */
     }
 
 }
