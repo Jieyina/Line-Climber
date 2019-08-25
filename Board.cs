@@ -37,7 +37,7 @@ namespace Tetris
                 b.Draw(spriteBatch, blockLocation);
             }
             // Draw the grid
-            for (int x = 0; x <= Width; x++)
+            /* for (int x = 0; x <= Width; x++)
             {
                 Rectangle rectangle = new Rectangle(boardLocation.X + x * blockWidth, boardLocation.Y, 1, blockHeight * VisibleHeight);
                 spriteBatch.Draw(texture1px, rectangle, Color.Black);
@@ -46,7 +46,7 @@ namespace Tetris
             {
                 Rectangle rectangle = new Rectangle(boardLocation.X, boardLocation.Y + y * blockHeight, blockWidth * Width, 1);
                 spriteBatch.Draw(texture1px, rectangle, Color.Black);
-            }
+            } */
         }
 
         // Check if the position is free
