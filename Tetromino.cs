@@ -8,8 +8,8 @@ namespace Tetris
 {
     public class Tetromino
     {
-        Block[] Blocks = new Block[4];
-        Board Board;
+        public Block[] Blocks = new Block[4];
+        public Board Board;
         public char Tag;
         public int X; // position X of the tetromino
         public int Y; // position Y of the tetromino
@@ -240,6 +240,7 @@ namespace Tetris
             }
             return true;
         }
+        
 
         public void DrawGhost(SpriteBatch spriteBatch, Rectangle boardLocation)
         {

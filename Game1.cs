@@ -130,6 +130,7 @@ namespace Tetris
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
+                    player.velocity = Vector2.Zero;
                     // Restart the game
                     Score = 0;
                     Lines = 0;
@@ -218,6 +219,7 @@ namespace Tetris
             }
 
             // player movement
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 temptVelocity.X = speed;
@@ -236,7 +238,7 @@ namespace Tetris
             {
                 temptVelocity.X = -speed;
                 nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
-                Console.WriteLine(player.IsColliding(nextPosition, gameBoard));
+                // Console.WriteLine(player.IsColliding(nextPosition, gameBoard));
                 if (player.IsColliding(nextPosition, gameBoard) == false && player.position.X > 250)
                 {
                     player.velocity.X = temptVelocity.X;
@@ -264,6 +266,10 @@ namespace Tetris
                 {
                     player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
                     player.velocity.Y = 0;
+                    if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
+                        {
+                        GameOver = true;
+                        }
                 }
             }
 
@@ -278,6 +284,10 @@ namespace Tetris
             {
                 player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
                 player.velocity.Y = 0;
+                if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
+                {
+                    GameOver = true;
+                }
             }
             else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y > 0)
             {
@@ -286,11 +296,17 @@ namespace Tetris
                 player.velocity.Y = 0;
             }
             player.position.Y += player.velocity.Y;
-
+            
             if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
             {
                 hasJumped = false;
                 player.position.Y = 936;
+            }
+            Console.WriteLine(player.position);
+            if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == true)
+            {
+                if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
+                { GameOver = true; }
             }
 
             base.Update(gameTime);
@@ -361,6 +377,16 @@ namespace Tetris
                 GameOver),
                 new Vector2(10, 300),
                 Color.GreenYellow);
+        }
+
+        public bool belongToCurrent(Block Block)
+        {
+            foreach (Block b in currentTetromino.Blocks)
+            {
+                if (b.X == Block.X && b.Y == Block.Y)
+                    return true;
+            }
+            return false;
         }
 
     }
