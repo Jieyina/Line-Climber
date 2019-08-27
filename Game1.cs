@@ -152,13 +152,9 @@ namespace Tetris
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     playerShouldRemove = false;
-                    player.position.X = 100;
-                    player.position.Y = 700;
                     player.velocity = Vector2.Zero;
                     // Restart the game
-                    // Score = 0;
                     Lines = 0;
-
                     // Reset the queue of next tetromino
                     nextTetrominos = new Queue<char>();
                     nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, new Random()));
@@ -263,7 +259,7 @@ namespace Tetris
                 temptVelocity.X = -speed;
                 nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
                 // Console.WriteLine(player.IsColliding(nextPosition, gameBoard));
-                if (player.IsColliding(nextPosition, gameBoard) == false && player.position.X > 250)
+                if (player.IsColliding(nextPosition, gameBoard) == false)
                 {
                     player.velocity.X = temptVelocity.X;
                 }
@@ -393,7 +389,7 @@ namespace Tetris
                 if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
                 { GameOver = true; }
             }
-            else if (player.position.X > 570 && player.position.X < 666 && player.position.Y > 690 && player.position.Y < 712 + 62)
+            else if (player.position.X > 570 && player.position.X < 570 + 96 && player.position.Y > 712 && player.position.Y < 712 + 96 - 32)
             {
                 GameWon = true;
                 player.position.Y = 760;
