@@ -50,17 +50,16 @@ namespace Tetris
 
         public bool TopColliding(float playerX, float playerY, Board Board)
         {
-            float topY = playerY;
-            float leftX = playerX;
-            float rightX = playerX + 32;
             for (int i = 0; i < Board.Blocks.Count; i++)
             {
+                float topY = playerY;
+                float leftX = playerX;
+                float rightX = playerX + 32;
                 float rightEdge = 250 + Board.Blocks[i].X * 32 + 32;
                 float leftEdge = 250 + Board.Blocks[i].X * 32;
                 float bottomEdge = 200 + (24 - Board.Blocks[i].Y) * 32;
-                float topEdge = 200 + (24 - Board.Blocks[i].Y) * 32 - 32;
-                // Console.WriteLine("{0},{1}",bottomEdge,topY);
-                if (topY == bottomEdge && leftX >= leftEdge && rightX <= rightEdge)
+                // Console.WriteLine("{0},{1}", playerY, bottomEdge);
+                if ((topY == bottomEdge && leftX >= leftEdge && leftX <= rightEdge) || (topY == bottomEdge && rightX >= leftEdge && rightX <= rightEdge))
                 {
                     collideIndex = i;
                     return true;

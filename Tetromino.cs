@@ -193,15 +193,15 @@ namespace Tetris
             // If the tetromino cannot move or rotate
             if (!CanMoveTo(X, Y - 1))
             {
-                if (TimeSinceStopFalling == 0)
+                /* if (TimeSinceStopFalling == 0)
                     TimeSinceStopFalling = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 500)
+                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 500) */
                     IsFalling = false;
             }
             else
             {
                 IsFalling = true;
-                TimeSinceStopFalling = 0;
+                // TimeSinceStopFalling = 0;
             }
         }
 

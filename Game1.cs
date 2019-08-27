@@ -11,7 +11,7 @@ namespace Tetris
     {
         // Game constantes
         player player;
-        Vector2 position1;
+        Vector2 position1 = new Vector2(500,200);
         Rectangle BoardLocation = new Rectangle(250, 200, 320, 768);
         Rectangle nextBlockBoardsLocation = new Rectangle(575, 100, 80, 80);
 
@@ -56,7 +56,6 @@ namespace Tetris
         float jumpStrength = 10f;
         float gravity = 0.4f;
         bool hasJumped;
-        bool falling;
         Vector2 temptVelocity;
         Vector2 nextPosition;
 
@@ -302,7 +301,7 @@ namespace Tetris
                 hasJumped = false;
                 player.position.Y = 936;
             }
-            Console.WriteLine(player.position);
+
             if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == true)
             {
                 if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
@@ -318,19 +317,17 @@ namespace Tetris
             spriteBatch.Begin();
             // Draw the background
             spriteBatch.Draw(background, new Rectangle(250, 200, 320, 768), Color.White);
-            // Draw the ghost piece
-            // currentTetromino?.DrawGhost(spriteBatch, BoardLocation);
+
             // Draw the board
             gameBoard.Draw(spriteBatch, BoardLocation, texture1px);
             nextBlockBoards.Draw(spriteBatch, nextBlockBoardsLocation, texture1px);
+
             // Draw Game Info
-        
             // Lines Cleared
             spriteBatch.DrawString(GameFont, String.Format("Cleared: {0}", Lines), new Vector2(50, 160), Color.White);
 
             // Draw the player
             player.Draw(spriteBatch, position1);
-
 
             if (GameOver)
             {
@@ -361,18 +358,14 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}Rotation Center: {4}{0}Rotation State: {5}{0}IsFalling: {6}{0}Level: {7}{0}Score: {8}{0}Lines: {9}{0}Speed: {10}{0}Next: {11}{0}Game over: {12}",
+                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}IsFalling: {6}{0}Next: {7}{0}Game over: {8}",
                 Environment.NewLine,
                 currentTetromino?.Tag,
                 currentTetromino?.X,
                 currentTetromino?.Y,
-                currentTetromino?.RotCenter.ToString(),
-                currentTetromino?.RotStatus,
+                player?.position.X,
+                player?.position.Y,
                 currentTetromino?.IsFalling,
-                Level,
-                Score,
-                Lines,
-                Speed,
                 string.Join(" ", nextTetrominos.ToArray()),
                 GameOver),
                 new Vector2(10, 300),
