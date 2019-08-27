@@ -11,7 +11,7 @@ namespace Tetris
     {
         // Game constantes
         player player;
-        Vector2 position1 = new Vector2(500,200);
+        Vector2 position1 = new Vector2(154, 968 - 32);
         Rectangle BoardLocation = new Rectangle(250, 200, 320, 768);
         Rectangle nextBlockBoardsLocation = new Rectangle(575, 100, 80, 80);
         bool playerShouldRemove = false;
@@ -27,6 +27,7 @@ namespace Tetris
         Texture2D ground;
         Texture2D ground1;
         Texture2D winGame;
+        Texture2D startPlace;
 
         // Fonts
         SpriteFont GameFont;
@@ -103,7 +104,7 @@ namespace Tetris
             background = Content.Load<Texture2D>("Images/background");
 
             // Player
-            player = new player(Content.Load<Texture2D>("Images/donekindof"), new Vector2(100, 700));
+            player = new player(Content.Load<Texture2D>("Images/donekindof"), position1);
 
             // Texture 1px
             texture1px = new Texture2D(GraphicsDevice, 1, 1);
@@ -122,7 +123,7 @@ namespace Tetris
             winGame = Content.Load<Texture2D>("Images/end_flag_96x96");
             ground = Content.Load<Texture2D>("Images/ground_320x96");
             ground1 = Content.Load<Texture2D>("Images/ground_96x37");
-
+            startPlace = Content.Load<Texture2D>("Images/start_96x96");
         }
 
         protected override void UnloadContent()
@@ -234,7 +235,6 @@ namespace Tetris
             }
 
             // player movement
-
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 temptVelocity.X = speed;
@@ -248,6 +248,8 @@ namespace Tetris
                     player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 - 32;
                     player.velocity.X = 0;
                 }
+                /* if ((player.position.Y >= 712 + 96 || player.position.Y <= 712) && player.position.X >= 250 && player.position.X <= 538 && nextPosition.X > 538)
+                    player.position.X = 570 - 32; */
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
@@ -263,20 +265,51 @@ namespace Tetris
                     player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 + 32;
                     player.velocity.X = 0;
                 }
+                /* if (((player.position.Y >= 712 + 96 && player.position.Y <= 968 -96) || player.position.Y <= 712) && player.position.X >= 250 && player.position.X <= 538 && nextPosition.X < 250)
+                    player.position.X = 250; */
             }
             else
                 player.velocity.X = 0;
             player.position.X += player.velocity.X;
 
-            if (player.position.Y >= 712 + 96 || player.position.Y <= 712)
+            if (player.position.Y <= 712)
             {
-                if (nextPosition.X > 538)
+                if (player.position.X >= 538)
                 {
                     player.position.X = 570 - 32;
                 }
-                else if (nextPosition.X < 250)
+                else if (player.position.X <= 250 )
                     player.position.X = 250;
             }
+
+            if (player.position.Y >= 712 + 96 && player.position.Y <= 968 -96)
+            {
+                if (player.position.X >= 538)
+                {
+                    player.position.X = 570 - 32;
+                }
+                else if (player.position.X <= 250)
+                    player.position.X = 250;
+            }
+            else if (player.position.Y >= 968 - 96)
+            {
+                if (player.position.X >= 538)
+                {
+                    player.position.X = 570 - 32;
+                }
+                else if (player.position.X <= 250 - 96)
+                    player.position.X = 250 - 96;
+            }
+
+            /* if ((player.position.Y >= 712 + 96 || player.position.Y <= 712) && player.position.X >= 250 && player.position.X <= 538)
+            {
+                if (player.position.X + player.velocity.X >= 538)
+                {
+                    player.position.X = 570 - 32;
+                }
+                else if (player.position.X + player.velocity.X <= 250)
+                    player.position.X = 250;
+            } */
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
@@ -321,7 +354,17 @@ namespace Tetris
                 player.velocity.Y = 0;
             }
             player.position.Y += player.velocity.Y;
-            
+
+            /* if ((player.position.Y >= 968 - 96 || player.position.Y <= 968 - 32) && player.position.X >= 250 - 96 && player.position.X <= 250)
+            {
+                if (nextPosition.X < 250 - 96)
+                {
+                    player.position.X = 250 - 96;
+                }
+                if (nextPosition.Y < 968 - 96)
+                    player.position.Y = 968 - 96;
+            } */
+
             if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
             {
                 hasJumped = false;
@@ -359,6 +402,7 @@ namespace Tetris
             spriteBatch.Draw(ground, new Vector2(250, 940), Color.White);
             spriteBatch.Draw(ground, new Vector2(0, 940), Color.White);
             spriteBatch.Draw(ground1, new Vector2(570, 808), Color.White);
+            spriteBatch.Draw(startPlace, new Vector2(154, 872), Color.White);
 
             // Draw Game Info
             // Lines Cleared
