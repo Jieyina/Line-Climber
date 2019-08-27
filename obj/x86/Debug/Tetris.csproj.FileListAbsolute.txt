@@ -475,3 +475,4 @@ C:\Users\u1274842\Documents\GitHub\Line-Climber\obj\x86\Debug\Tetris.csproj.Copy
 C:\Users\u1274842\Documents\GitHub\Line-Climber\obj\x86\Debug\Tetris.exe
 C:\Users\u1274842\Documents\GitHub\Line-Climber\obj\x86\Debug\Tetris.pdb
 C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\start_96x96.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\Logo_820.xnb

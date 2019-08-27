@@ -27,11 +27,13 @@
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/end_flag_96x96.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/ground_320x96.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/ground_96x37.png</File>
+    <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/Logo_820.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/Nextboxbg.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/start_96x96.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/titleScreen.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
