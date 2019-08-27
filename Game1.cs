@@ -269,37 +269,8 @@ namespace Tetris
                     player.position.X = 250; */
             }
             else
-                player.velocity.X = 0;
+                    player.velocity.X = 0;
             player.position.X += player.velocity.X;
-
-            if (player.position.Y <= 712)
-            {
-                if (player.position.X >= 538)
-                {
-                    player.position.X = 570 - 32;
-                }
-                else if (player.position.X <= 250 )
-                    player.position.X = 250;
-            }
-
-            if (player.position.Y >= 712 + 96 && player.position.Y <= 968 -96)
-            {
-                if (player.position.X >= 538)
-                {
-                    player.position.X = 570 - 32;
-                }
-                else if (player.position.X <= 250)
-                    player.position.X = 250;
-            }
-            else if (player.position.Y >= 968 - 96)
-            {
-                if (player.position.X >= 538)
-                {
-                    player.position.X = 570 - 32;
-                }
-                else if (player.position.X <= 250 - 96)
-                    player.position.X = 250 - 96;
-            }
 
             /* if ((player.position.Y >= 712 + 96 || player.position.Y <= 712) && player.position.X >= 250 && player.position.X <= 538)
             {
@@ -315,11 +286,18 @@ namespace Tetris
             {
                 nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
                 if (player.IsColliding(nextPosition, gameBoard) == false && hasJumped == false)
-                {
-                    player.position.Y -= jumpStrength;
-                    player.velocity.Y = -5f;
-                    hasJumped = true;
-                }
+                    if (nextPosition.Y <= 200)
+                    {
+                        player.position.Y = 200;
+                        player.velocity.Y = -5f;
+                        hasJumped = true;
+                    }
+                    else
+                    {
+                        player.position.Y -= jumpStrength;
+                        player.velocity.Y = -5f;
+                        hasJumped = true;
+                    }
                 else if (player.IsColliding(nextPosition, gameBoard) == true)
                 {
                     player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
@@ -355,15 +333,34 @@ namespace Tetris
             }
             player.position.Y += player.velocity.Y;
 
-            /* if ((player.position.Y >= 968 - 96 || player.position.Y <= 968 - 32) && player.position.X >= 250 - 96 && player.position.X <= 250)
+            if (player.position.Y <= 712)
             {
-                if (nextPosition.X < 250 - 96)
+                if (player.position.X >= 538)
                 {
-                    player.position.X = 250 - 96;
+                    player.position.X = 570 - 32;
                 }
-                if (nextPosition.Y < 968 - 96)
-                    player.position.Y = 968 - 96;
-            } */
+                else if (player.position.X <= 250)
+                    player.position.X = 250;
+            }
+
+            if (player.position.Y >= 712 + 96 && player.position.Y <= 968 - 96)
+            {
+                if (player.position.X >= 538)
+                {
+                    player.position.X = 570 - 32;
+                }
+                else if (player.position.X <= 250)
+                    player.position.X = 250;
+            }
+            else if (player.position.Y >= 968 - 96)
+            {
+                if (player.position.X >= 538)
+                {
+                    player.position.X = 570 - 32;
+                }
+                else if (player.position.X <= 250 - 96)
+                    player.position.X = 250 - 96;
+            }
 
             if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
             {
