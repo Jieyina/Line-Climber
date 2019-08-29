@@ -8,8 +8,8 @@ namespace Tetris
 {
     public class Tetromino
     {
-        Block[] Blocks = new Block[4];
-        Board Board;
+        public Block[] Blocks = new Block[4];
+        public Board Board;
         public char Tag;
         public int X; // position X of the tetromino
         public int Y; // position Y of the tetromino
@@ -193,15 +193,15 @@ namespace Tetris
             // If the tetromino cannot move or rotate
             if (!CanMoveTo(X, Y - 1))
             {
-                if (TimeSinceStopFalling == 0)
+                /* if (TimeSinceStopFalling == 0)
                     TimeSinceStopFalling = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 500)
+                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 500) */
                     IsFalling = false;
             }
             else
             {
                 IsFalling = true;
-                TimeSinceStopFalling = 0;
+                // TimeSinceStopFalling = 0;
             }
         }
 
@@ -240,6 +240,7 @@ namespace Tetris
             }
             return true;
         }
+        
 
         public void DrawGhost(SpriteBatch spriteBatch, Rectangle boardLocation)
         {
