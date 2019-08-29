@@ -24,8 +24,6 @@ namespace Tetris
         int GameState = STATE_MENU;
 
         // Status
-        bool GameOver = false;
-        bool GameWon = false;
         bool Restart = false;
 
         GraphicsDeviceManager graphics;
@@ -42,6 +40,7 @@ namespace Tetris
         Texture2D startPlace;
         Texture2D logo;
         Texture2D nextPiece;
+        Texture2D StartBackground;
 
         // Menu textures
         GameObject buttonStart, buttonExit, buttonResume, buttonOutline, buttonRestart;
@@ -61,7 +60,7 @@ namespace Tetris
         int Lines = 0;
         float Speed => 5 + Level; 
         int Level => (int) Math.Floor((double)Lines / 10);
-        int endHeight = 624;
+        int endHeight = 432;
 
         //double 
         double lastActionTime = 0; // lastUpdate time in ms
@@ -119,9 +118,8 @@ namespace Tetris
             buttonResume = new GameObject(resume, HAlignedTextureRectangle(resume, 450));
             buttonOutline = new GameObject(outline, HAlignedTextureRectangle(outline, 0));
             buttonRestart = new GameObject(restart, HAlignedTextureRectangle(restart, 650));
-            buttonResume.Disable(spriteBatch);
-            buttonOutline.Disable(spriteBatch);
-            buttonRestart.Disable(spriteBatch);
+            // buttonOutline.Disable(spriteBatch);
+            // buttonRestart.Disable(spriteBatch);
 
             // Load block sprites
             BlockTextures.Add('?', Content.Load<Texture2D>("Images/block_white"));
@@ -155,6 +153,7 @@ namespace Tetris
             goal = Content.Load<Texture2D>("Images/end_flag_96x96");
             ground = Content.Load<Texture2D>("Images/ground_320x96");
             ground1 = Content.Load<Texture2D>("Images/ground_96x37");
+            StartBackground = Content.Load<Texture2D>("Images/start_96x96");
             startPlace = Content.Load<Texture2D>("Images/StartingArea");
             logo = Content.Load<Texture2D>("Images/Logo_820");
             nextPiece = Content.Load<Texture2D>("Images/Nextboxbg");
@@ -187,6 +186,8 @@ namespace Tetris
             switch (GameState)
             {
                 case STATE_MENU:
+                    buttonResume.Disable(spriteBatch);
+                    buttonRestart.Disable(spriteBatch);
                     if (Clicked(ref mouseState, buttonStart))
                         GameState = STATE_PLAYING;
                     if (Clicked(ref mouseState, buttonExit))
@@ -196,6 +197,7 @@ namespace Tetris
                     buttonStart.Disable(spriteBatch);
                     buttonExit.Disable(spriteBatch);
                     buttonResume.Disable(spriteBatch);
+                    buttonRestart.Disable(spriteBatch);
                     if (keyboardState.IsKeyDown(Keys.P))
                         GameState = STATE_PAUSED;
                     break;
@@ -203,6 +205,11 @@ namespace Tetris
                     buttonResume.Enable(spriteBatch);
                     buttonExit.Enable(spriteBatch);
                     buttonRestart.Enable(spriteBatch);
+                    if (Clicked(ref mouseState, buttonRestart))
+                    {
+                        GameState = STATE_PLAYING;
+                        Restart = true;
+                    }
                     if (Clicked(ref mouseState, buttonResume))
                         GameState = STATE_PLAYING;
                     if (Clicked(ref mouseState, buttonExit))
@@ -214,7 +221,7 @@ namespace Tetris
                     if (Clicked(ref mouseState, buttonRestart))
                     {
                         GameState = STATE_PLAYING;
-                        
+                        Restart = true;
                     }
                     if (Clicked(ref mouseState, buttonExit))
                         Exit();
@@ -222,7 +229,13 @@ namespace Tetris
                 case STATE_GAMEWON:
                     buttonRestart.Enable(spriteBatch);
                     buttonExit.Enable(spriteBatch);
-                    GameState = STATE_MENU;
+                    if (Clicked(ref mouseState, buttonRestart))
+                    {
+                        GameState = STATE_PLAYING;
+                        Restart = true;
+                    }
+                    if (Clicked(ref mouseState, buttonExit))
+                        Exit();
                     break;
                 default:
                     break;
@@ -484,6 +497,7 @@ namespace Tetris
             buttonExit.Draw(spriteBatch);
             buttonResume.Draw(spriteBatch);
             buttonOutline.Draw(spriteBatch);
+            buttonRestart.Draw(spriteBatch);
 
             if (GameState == STATE_PLAYING)
             {
@@ -492,6 +506,7 @@ namespace Tetris
                 // spriteBatch.Draw(ground, new Vector2(250, 940), Color.White);
                 // spriteBatch.Draw(ground, new Vector2(0, 940), Color.White);
                 // spriteBatch.Draw(ground1, new Vector2(570, 808), Color.White);
+                spriteBatch.Draw(StartBackground, new Vector2(128, 800 - 16 - 96), Color.White);
                 spriteBatch.Draw(startPlace, new Vector2(128, 800 - 16 - 96), Color.White);
                 spriteBatch.Draw(nextPiece, new Vector2(16, 480), Color.White);
 
@@ -546,7 +561,7 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}hasJumped:{10}{0}IsFalling: {11}{0}Next: {12}{0}Game over: {13}",
+                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}hasJumped:{10}{0}IsFalling: {11}{0}Next: {12}",
                 Environment.NewLine,
                 currentTetromino?.Tag,
                 currentTetromino?.X,
@@ -559,8 +574,7 @@ namespace Tetris
                 player?.velocity.Y,
                 hasJumped,
                 currentTetromino?.IsFalling,
-                string.Join(" ", nextTetrominos.ToArray()),
-                GameOver),
+                string.Join(" ", nextTetrominos.ToArray())),
                 new Vector2(10, 30),
                 Color.GreenYellow);
         }
@@ -582,7 +596,7 @@ namespace Tetris
 
         private bool ButtonIntersects(ref MouseState mouseState, GameObject button)
         {
-            if (GameState == STATE_MENU || GameState == STATE_PAUSED)
+            if (GameState == STATE_MENU || GameState == STATE_PAUSED || GameState == STATE_GAMEOVER || GameState == STATE_GAMEWON)
                 return button.BoundingBox.Contains(mouseState.Position);
             return false;
         }
