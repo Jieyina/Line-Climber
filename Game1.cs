@@ -23,6 +23,11 @@ namespace Tetris
         const int STATE_GAMEWON = 4;
         int GameState = STATE_MENU;
 
+        // Status
+        bool GameOver = false;
+        bool GameWon = false;
+        bool Restart = false;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -67,10 +72,6 @@ namespace Tetris
         Queue<char> nextTetrominos = new Queue<char>();
         string CHARLIST = "IOJLZTS";
 
-        // Status
-        bool GameOver = false;
-        bool GameWon = false;
-
         // Player related
         float speed = 3f;
         float jumpStrength = 10f;
@@ -98,6 +99,7 @@ namespace Tetris
             nextBlockBoards = new Board(4,4);
             char nextTetrominoTag = GetRandomCharacter(CHARLIST, randomGenerator);
             nextTetrominos.Enqueue(nextTetrominoTag);
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -153,7 +155,7 @@ namespace Tetris
             goal = Content.Load<Texture2D>("Images/end_flag_96x96");
             ground = Content.Load<Texture2D>("Images/ground_320x96");
             ground1 = Content.Load<Texture2D>("Images/ground_96x37");
-            startPlace = Content.Load<Texture2D>("Images/start_96x96");
+            startPlace = Content.Load<Texture2D>("Images/StartingArea");
             logo = Content.Load<Texture2D>("Images/Logo_820");
             nextPiece = Content.Load<Texture2D>("Images/Nextboxbg");
         }
@@ -165,9 +167,6 @@ namespace Tetris
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -210,12 +209,20 @@ namespace Tetris
                         Exit();
                     break;
                 case STATE_GAMEOVER:
-                    if (keyboardState.IsKeyDown(Keys.Enter))
-                        GameState = STATE_MENU;
+                    buttonRestart.Enable(spriteBatch);
+                    buttonExit.Enable(spriteBatch);
+                    if (Clicked(ref mouseState, buttonRestart))
+                    {
+                        GameState = STATE_PLAYING;
+                        
+                    }
+                    if (Clicked(ref mouseState, buttonExit))
+                        Exit();
                     break;
                 case STATE_GAMEWON:
-                    if (keyboardState.IsKeyDown(Keys.Enter))
-                        GameState = STATE_MENU;
+                    buttonRestart.Enable(spriteBatch);
+                    buttonExit.Enable(spriteBatch);
+                    GameState = STATE_MENU;
                     break;
                 default:
                     break;
@@ -223,24 +230,19 @@ namespace Tetris
 
             if (GameState == STATE_PLAYING)
             {
-                if (GameOver || GameWon)
+                if (Restart == true)
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    {
-                        player.position = position1;
-                        player.velocity = Vector2.Zero;
-                        // Restart the game
-                        Lines = 0;
-                        // Reset the queue of next tetromino
-                        nextTetrominos = new Queue<char>();
-                        nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, new Random()));
-                        // Reset the board
-                        gameBoard.Reset();
-                        GameOver = false;
-                        GameWon = false;
-                        hasJumped = false;
-                    }
-                    return;
+                    player.position = position1;
+                    player.velocity = Vector2.Zero;
+                    // Restart the game
+                    Lines = 0;
+                    // Reset the queue of next tetromino
+                    nextTetrominos = new Queue<char>();
+                    nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, new Random()));
+                    // Reset the board
+                    gameBoard.Reset();
+                    hasJumped = false;
+                    Restart = false;
                 }
 
                 // Tetromino generation
@@ -303,7 +305,7 @@ namespace Tetris
                 {
                     // If the tetromino is outside 
                     if (currentTetromino.Y >= 22)
-                        GameOver = true;
+                        GameState = STATE_GAMEOVER;
 
                     // Get the row to remove
                     int rowCleared = gameBoard.ClearRow();
@@ -375,7 +377,7 @@ namespace Tetris
                         hasJumped = true;
                         if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
                         {
-                            GameOver = true;
+                            GameState = STATE_GAMEOVER;
                         }
                     }
                 }
@@ -452,15 +454,20 @@ namespace Tetris
                 if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == true)
                 {
                     if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
-                    { GameOver = true; }
+                    { GameState = STATE_GAMEOVER; }
                 }
                 else if (player.position.X > 224 + 320 && player.position.X < 224 + 320 + 96 && player.position.Y > endHeight && player.position.Y < endHeight + 96 - 32)
                 {
-                    GameWon = true;
+                    GameState = STATE_GAMEWON;
                     // player.position.Y = endHeight+40;
                     // player.velocity.Y = 0;
                     // hasJumped = false;
                 }
+            }
+
+            if (GameState == STATE_PAUSED)
+            {
+                player.velocity = Vector2.Zero;
             }
 
             base.Update(gameTime);
@@ -507,7 +514,7 @@ namespace Tetris
             if (GameState == STATE_GAMEOVER)
             {
                 // Draw game over screen
-                spriteBatch.DrawString(GameFont, "Game Over!\nPress Enter to restart.", new Vector2(250, 210), Color.Red);
+                spriteBatch.DrawString(GameFont, "Game Over!", new Vector2(250, 210), Color.Red);
             }
 
             // Display the debug Window
@@ -516,7 +523,7 @@ namespace Tetris
             if (GameState == STATE_GAMEWON)
             {
                 // Draw game over screen
-                spriteBatch.DrawString(GameFont, "Game Won!\nPress Enter to restart.", new Vector2(30, 210), Color.Yellow);
+                spriteBatch.DrawString(GameFont, "Game Won!", new Vector2(30, 210), Color.Yellow);
             }
 
             spriteBatch.End();
