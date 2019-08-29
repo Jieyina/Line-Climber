@@ -111,15 +111,13 @@ namespace Tetris
             Texture2D start = Content.Load<Texture2D>("menu/button_start");
             Texture2D exit = Content.Load<Texture2D>("menu/button_exit");
             Texture2D resume = Content.Load<Texture2D>("menu/button_resume");
-            Texture2D outline = Content.Load<Texture2D>("menu/button_outline");
             Texture2D restart = Content.Load<Texture2D>("menu/button_restart");
+            Texture2D outline = Content.Load<Texture2D>("menu/button_outline");
             buttonStart = new GameObject(start, HAlignedTextureRectangle(start, 450));
             buttonExit = new GameObject(exit, HAlignedTextureRectangle(exit, 550));
             buttonResume = new GameObject(resume, HAlignedTextureRectangle(resume, 450));
-            buttonOutline = new GameObject(outline, HAlignedTextureRectangle(outline, 0));
             buttonRestart = new GameObject(restart, HAlignedTextureRectangle(restart, 650));
-            // buttonOutline.Disable(spriteBatch);
-            // buttonRestart.Disable(spriteBatch);
+            buttonOutline = new GameObject(outline, HAlignedTextureRectangle(outline, 0));
 
             // Load block sprites
             BlockTextures.Add('?', Content.Load<Texture2D>("Images/block_white"));
@@ -169,7 +167,7 @@ namespace Tetris
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (ButtonIntersects(ref mouseState, buttonStart) || ButtonIntersects(ref mouseState, buttonExit) || ButtonIntersects(ref mouseState, buttonResume))
+            if (ButtonIntersects(ref mouseState, buttonStart) || ButtonIntersects(ref mouseState, buttonExit) || ButtonIntersects(ref mouseState, buttonResume) || ButtonIntersects(ref mouseState, buttonRestart))
                 buttonOutline.Enable(spriteBatch);
             else
                 buttonOutline.Disable(spriteBatch);
