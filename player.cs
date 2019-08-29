@@ -31,10 +31,10 @@ namespace Tetris
             float topY = nextPosition.Y;
             for (int i = 0; i < Board.Blocks.Count; i++)
             {
-                float rightEdge = 250 + Board.Blocks[i].X * 32 + 32;
-                float leftEdge = 250 + Board.Blocks[i].X * 32;
-                float bottomEdge = 200 + (24 - Board.Blocks[i].Y) * 32;
-                float topEdge = 200 + (24 - Board.Blocks[i].Y) * 32 - 32;
+                float rightEdge = 224 + Board.Blocks[i].X * 32 + 32;
+                float leftEdge = 224 + Board.Blocks[i].X * 32;
+                float bottomEdge = 16 + (24 - Board.Blocks[i].Y) * 32;
+                float topEdge = 16 + (24 - Board.Blocks[i].Y) * 32 - 32;
                 if (rightX <= leftEdge || leftX >= rightEdge || bottomY <= topEdge || topY >= bottomEdge)
                 {
                     int check = i + 1;
@@ -55,9 +55,9 @@ namespace Tetris
                 float topY = playerY;
                 float leftX = playerX;
                 float rightX = playerX + 32;
-                float rightEdge = 250 + Board.Blocks[i].X * 32 + 32;
-                float leftEdge = 250 + Board.Blocks[i].X * 32;
-                float bottomEdge = 200 + (24 - Board.Blocks[i].Y) * 32;
+                float rightEdge = 224 + Board.Blocks[i].X * 32 + 32;
+                float leftEdge = 224 + Board.Blocks[i].X * 32;
+                float bottomEdge = 16 + (24 - Board.Blocks[i].Y) * 32;
                 // Console.WriteLine("{0},{1}", playerY, bottomEdge);
                 if ((topY == bottomEdge && leftX > leftEdge && leftX < rightEdge) || (topY == bottomEdge && rightX > leftEdge && rightX < rightEdge) || (topY == bottomEdge && leftX == leftEdge && rightX == rightEdge))
                 {
@@ -68,7 +68,7 @@ namespace Tetris
             return false;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position1)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
         }

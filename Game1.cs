@@ -11,10 +11,9 @@ namespace Tetris
     {
         // Game constantes
         player player;
-        Vector2 position1 = new Vector2(154, 968 - 32);
-        Rectangle BoardLocation = new Rectangle(250, 200, 320, 768);
-        Rectangle nextBlockBoardsLocation = new Rectangle(571, 141, 80, 80);
-        bool playerShouldRemove = false;
+        Vector2 position1 = new Vector2(128, 800 - 16 - 32);
+        Rectangle BoardLocation = new Rectangle(224, 16, 320, 768);
+        Rectangle nextBlockBoardsLocation = new Rectangle(16+36, 480+50, 120, 120);
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -26,7 +25,7 @@ namespace Tetris
         Texture2D background;
         Texture2D ground;
         Texture2D ground1;
-        Texture2D winGame;
+        Texture2D goal;
         Texture2D startPlace;
         Texture2D logo;
         Texture2D nextPiece;
@@ -40,11 +39,13 @@ namespace Tetris
 
         Tetromino currentTetromino;
         Random randomGenerator;
+
         // Game parameters
         int Score = 0;
         int Lines = 0;
         float Speed => 5 + Level; 
-        int Level => (int) Math.Floor((double)Lines / 10); 
+        int Level => (int) Math.Floor((double)Lines / 10);
+        int endHeight = 400;
 
         //double 
         double lastActionTime = 0; // lastUpdate time in ms
@@ -70,8 +71,8 @@ namespace Tetris
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 820;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = 1010;   // set this value to the desired height of your window
+            graphics.PreferredBackBufferWidth = 656;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 800;   // set this value to the desired height of your window
             //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
@@ -103,6 +104,7 @@ namespace Tetris
             BlockTextures.Add('J', Content.Load<Texture2D>("Images/block_orange"));
             BlockTextures.Add('Z', Content.Load<Texture2D>("Images/block_green"));
             BlockTextures.Add('T', Content.Load<Texture2D>("Images/block_purple"));
+
             background = Content.Load<Texture2D>("Images/background");
 
             // Player
@@ -122,7 +124,7 @@ namespace Tetris
             GameFont = Content.Load<SpriteFont>("Fonts/MyFont");
 
             //load endimage
-            winGame = Content.Load<Texture2D>("Images/end_flag_96x96");
+            goal = Content.Load<Texture2D>("Images/end_flag_96x96");
             ground = Content.Load<Texture2D>("Images/ground_320x96");
             ground1 = Content.Load<Texture2D>("Images/ground_96x37");
             startPlace = Content.Load<Texture2D>("Images/start_96x96");
@@ -137,21 +139,14 @@ namespace Tetris
 
         protected override void Update(GameTime gameTime)
         {
-            // Exit check
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                GameOver = true;
-            }
-
             if (GameOver || GameWon)
             {
-                playerShouldRemove = true;
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
-                    playerShouldRemove = false;
+                    player.position = position1;
                     player.velocity = Vector2.Zero;
                     // Restart the game
                     Lines = 0;
@@ -162,7 +157,8 @@ namespace Tetris
                     gameBoard.Reset();
                     GameOver = false;
                     GameWon = false;
-                }    
+                    hasJumped = false;
+                }
                 return;
             }
 
@@ -172,8 +168,8 @@ namespace Tetris
                 currentTetromino = GenerateNewTetromino(nextTetrominos.Dequeue());
                 nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, randomGenerator));
 
-                    // Reset the nextBlockBoards
-                    nextBlockBoards.Reset();
+                // Reset the nextBlockBoards
+                nextBlockBoards.Reset();
                 // add a tetromino in the board
                 new Tetromino(nextBlockBoards, 2, 1, nextTetrominos.ElementAt(0), BlockTextures[nextTetrominos.ElementAt(0)]);
             }
@@ -184,7 +180,7 @@ namespace Tetris
                 currentTetromino?.MoveTo(currentTetromino.X, currentTetromino.Y - 1);
                 lastGravityEffectTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
-            
+
             // Check for last action / update
             bool actionIsAllowed = false;
             if (gameTime.TotalGameTime.TotalMilliseconds - lastActionTime > ActionDelay)
@@ -227,13 +223,13 @@ namespace Tetris
                 // If the tetromino is outside 
                 if (currentTetromino.Y >= 22)
                     GameOver = true;
-          
+
                 // Get the row to remove
                 int rowCleared = gameBoard.ClearRow();
                 if (rowCleared > 0)
                 {
                     // Increase Score
-                    Score +=  (Level + 1) * 100 * (int) Math.Pow(2, rowCleared);
+                    Score += (Level + 1) * 100 * (int)Math.Pow(2, rowCleared);
                     // Update Lines
                     Lines += rowCleared;
                 }
@@ -250,7 +246,7 @@ namespace Tetris
                 }
                 else if (player.IsColliding(nextPosition, gameBoard) == true)
                 {
-                    player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 - 32;
+                    player.position.X = 224 + gameBoard.Blocks[player.collideBlock].X * 32 - 32;
                     player.velocity.X = 0;
                 }
             }
@@ -265,31 +261,22 @@ namespace Tetris
                 }
                 else if (player.IsColliding(nextPosition, gameBoard) == true)
                 {
-                    player.position.X = 250 + gameBoard.Blocks[player.collideBlock].X * 32 + 32;
+                    player.position.X = 224 + gameBoard.Blocks[player.collideBlock].X * 32 + 32;
                     player.velocity.X = 0;
                 }
             }
             else
-                    player.velocity.X = 0;
+                player.velocity.X = 0;
             player.position.X += player.velocity.X;
-
-            /* if ((player.position.Y >= 712 + 96 || player.position.Y <= 712) && player.position.X >= 250 && player.position.X <= 538)
-            {
-                if (player.position.X + player.velocity.X >= 538)
-                {
-                    player.position.X = 570 - 32;
-                }
-                else if (player.position.X + player.velocity.X <= 250)
-                    player.position.X = 250;
-            } */
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
+                // Console.WriteLine("{0},{1},{2}",player.IsColliding(nextPosition, gameBoard), hasJumped, nextPosition);
                 if (player.IsColliding(nextPosition, gameBoard) == false && hasJumped == false)
-                    if (nextPosition.Y <= 200)
+                    if (nextPosition.Y <= 16)
                     {
-                        player.position.Y = 200;
+                        player.position.Y = 16;
                         player.velocity.Y = -5f;
                         hasJumped = true;
                     }
@@ -298,16 +285,17 @@ namespace Tetris
                         player.position.Y -= jumpStrength;
                         player.velocity.Y = -5f;
                         hasJumped = true;
+                        // Console.WriteLine("jumped");
                     }
                 else if (player.IsColliding(nextPosition, gameBoard) == true && hasJumped == false)
                 {
-                    player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
+                    player.position.Y = 16 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
                     player.velocity.Y = 0;
                     hasJumped = true;
                     if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
-                        {
+                    {
                         GameOver = true;
-                        }
+                    }
                 }
             }
 
@@ -320,67 +308,63 @@ namespace Tetris
             }
             else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y < 0)
             {
-                player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
+                player.position.Y = 16 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32;
                 player.velocity.Y = 0;
-                if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
-                {
-                    GameOver = true;
-                }
             }
             else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y > 0)
             {
                 hasJumped = false;
-                player.position.Y = 200 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32 - 64;
+                player.position.Y = 16 + (24 - gameBoard.Blocks[player.collideBlock].Y) * 32 - 64;
                 player.velocity.Y = 0;
             }
             player.position.Y += player.velocity.Y;
 
-            if (player.position.Y <= 712)
+            if (player.position.Y <= endHeight)
             {
-                if (player.position.X >= 538)
+                if (player.position.X >= 656 - 112 - 32)
                 {
-                    player.position.X = 570 - 32;
+                    player.position.X = 656 - 112 - 32;
                     player.velocity.X = 0;
                 }
-                else if (player.position.X <= 250)
+                else if (player.position.X <= 224)
                 {
-                    player.position.X = 250;
+                    player.position.X = 224;
                     player.velocity.X = 0;
                 }
             }
 
-            if (player.position.Y >= 712 + 96 && player.position.Y <= 968 - 96)
+            if (player.position.Y >= endHeight + 96 && player.position.Y <= 800 - 16 - 96)
             {
-                if (player.position.X >= 538)
+                if (player.position.X >= 656 - 112 - 32)
                 {
-                    player.position.X = 570 - 32;
+                    player.position.X = 656 - 112 - 32;
                     player.velocity.X = 0;
                 }
-                else if (player.position.X <= 250)
+                else if (player.position.X <= 224)
                 {
-                    player.position.X = 250;
+                    player.position.X = 224;
                     player.velocity.X = 0;
                 }
 
             }
-            else if (player.position.Y >= 968 - 96)
+            else if (player.position.Y >= 800 - 16 - 96)
             {
-                if (player.position.X >= 538)
+                if (player.position.X >= 656 - 112 - 32)
                 {
-                    player.position.X = 570 - 32;
+                    player.position.X = 656 - 112 - 32;
                     player.velocity.X = 0;
                 }
-                else if (player.position.X <= 250 - 96)
+                else if (player.position.X <= 224 - 96)
                 {
-                    player.position.X = 250 - 96;
+                    player.position.X = 224 - 96;
                     player.velocity.X = 0;
                 }
             }
 
-            if (Math.Ceiling(player.position.Y + player.texture.Height + player.velocity.Y) >= 968)
+            if (player.position.Y + player.velocity.Y >= 800 - 16 - 32)
             {
                 hasJumped = false;
-                player.position.Y = 936;
+                player.position.Y = 800 - 16 - 32;
                 player.velocity.Y = 0;
             }
 
@@ -389,12 +373,12 @@ namespace Tetris
                 if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
                 { GameOver = true; }
             }
-            else if (player.position.X > 570 && player.position.X < 570 + 96 && player.position.Y > 712 && player.position.Y < 712 + 96 - 32)
+            else if (player.position.X > 224 + 320 && player.position.X < 224 + 320 + 96 && player.position.Y > endHeight && player.position.Y < endHeight + 96 - 32)
             {
                 GameWon = true;
-                player.position.Y = 760;
-                player.velocity.Y = 0;
-                hasJumped = false;
+                // player.position.Y = endHeight+40;
+                // player.velocity.Y = 0;
+                // hasJumped = false;
             }
 
             base.Update(gameTime);
@@ -402,17 +386,17 @@ namespace Tetris
 
         protected override void Draw (GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            // Draw the background
-            spriteBatch.Draw(background, new Rectangle(250, 200, 320, 768), Color.White);
-            spriteBatch.Draw(winGame, new Vector2(570, 712), Color.White);
-            spriteBatch.Draw(ground, new Vector2(250, 940), Color.White);
-            spriteBatch.Draw(ground, new Vector2(0, 940), Color.White);
-            spriteBatch.Draw(ground1, new Vector2(570, 808), Color.White);
-            spriteBatch.Draw(startPlace, new Vector2(154, 872), Color.White);
-            spriteBatch.Draw(logo, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(nextPiece, new Vector2(571, 120), Color.White);
+
+            // spriteBatch.Draw(logo, new Vector2(3, 50), Color.White);
+            spriteBatch.Draw(background, new Rectangle(224, 16, 320, 768), Color.White);
+            spriteBatch.Draw(goal, new Vector2(656 - 112, endHeight), Color.White);
+            // spriteBatch.Draw(ground, new Vector2(250, 940), Color.White);
+            // spriteBatch.Draw(ground, new Vector2(0, 940), Color.White);
+            // spriteBatch.Draw(ground1, new Vector2(570, 808), Color.White);
+            spriteBatch.Draw(startPlace, new Vector2(128, 800 - 16 - 96), Color.White);
+            spriteBatch.Draw(nextPiece, new Vector2(16, 480), Color.White);
 
             // Draw the board
             gameBoard.Draw(spriteBatch, BoardLocation, texture1px);
@@ -420,29 +404,29 @@ namespace Tetris
 
             // Draw Game Info
             // Lines Cleared
-            spriteBatch.DrawString(GameFont, String.Format("Cleared: {0}", Lines), new Vector2(50, 160), Color.White);
+            spriteBatch.DrawString(GameFont, String.Format("Lines Cleared: {0}", Lines), new Vector2(30, 450), Color.White);
 
             // Draw the player
-            if(playerShouldRemove == false)
+            player.Draw(spriteBatch);
+            /* if (playerShouldRemove == false)
             {
-                player.Draw(spriteBatch, position1);
-            }
+                player.Draw(spriteBatch);
+            } */
 
             if (GameOver)
             {
                 // Draw game over screen
-                spriteBatch.DrawString(GameFont, "Game Over!\nPress Enter to restart.", new Vector2(50, 210), Color.Red);
+                spriteBatch.DrawString(GameFont, "Game Over!\nPress Enter to restart.", new Vector2(30, 210), Color.Red);
             }
 
             // Display the debug Window
-            DrawDebugWindow(spriteBatch);
+            // DrawDebugWindow(spriteBatch);
 
             if (GameWon)
             {
                 // Draw game over screen
-                spriteBatch.DrawString(GameFont, "Game Won!\nPress Enter to restart.", new Vector2(50, 210), Color.Red);
+                spriteBatch.DrawString(GameFont, "Game Won!\nPress Enter to restart.", new Vector2(30, 210), Color.Yellow);
             }
-
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -464,7 +448,7 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}IsFalling: {10}{0}Next: {11}{0}Game over: {12}",
+                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}hasJumped:{10}{0}IsFalling: {11}{0}Next: {12}{0}Game over: {13}",
                 Environment.NewLine,
                 currentTetromino?.Tag,
                 currentTetromino?.X,
@@ -475,10 +459,11 @@ namespace Tetris
                 nextPosition.Y,
                 player?.velocity.X,
                 player?.velocity.Y,
+                hasJumped,
                 currentTetromino?.IsFalling,
                 string.Join(" ", nextTetrominos.ToArray()),
                 GameOver),
-                new Vector2(10, 300),
+                new Vector2(10, 30),
                 Color.GreenYellow);
         }
 
