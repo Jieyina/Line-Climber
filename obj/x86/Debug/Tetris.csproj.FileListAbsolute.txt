@@ -588,3 +588,9 @@ C:\Users\u1274842\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.cs
 C:\Users\u1274842\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.exe
 C:\Users\u1274842\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.pdb
 C:\Users\u1274842\Downloads\Line-Climber-menu-developing\bin\Windows\x86\Debug\Content\Images\StartingArea.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\StartingArea.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\menu\button_exit.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\menu\button_outline.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\menu\button_restart.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\menu\button_resume.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\menu\button_start.xnb

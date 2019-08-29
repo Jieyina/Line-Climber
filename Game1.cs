@@ -76,6 +76,7 @@ namespace Tetris
         float jumpStrength = 10f;
         float gravity = 0.4f;
         bool hasJumped;
+        bool outOfStart;
         Vector2 temptVelocity;
         Vector2 nextPosition;
 
@@ -254,11 +255,12 @@ namespace Tetris
                     // Reset the board
                     gameBoard.Reset();
                     hasJumped = false;
+                    outOfStart = false;
                     Restart = false;
                 }
 
                 // Tetromino generation
-                if (currentTetromino == null || !currentTetromino.IsFalling)
+                if ((currentTetromino == null || !currentTetromino.IsFalling) && outOfStart == true)
                 {
                     currentTetromino = GenerateNewTetromino(nextTetrominos.Dequeue());
                     nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, randomGenerator));
@@ -367,6 +369,9 @@ namespace Tetris
                     player.velocity.X = 0;
                 player.position.X += player.velocity.X;
 
+                if (player.position.X >= 224)
+                    outOfStart = true;
+
                 if (Keyboard.GetState().IsKeyDown(Keys.W))
                 {
                     nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
@@ -452,9 +457,14 @@ namespace Tetris
                         player.position.X = 656 - 112 - 32;
                         player.velocity.X = 0;
                     }
-                    else if (player.position.X <= 224 - 96)
+                    else if (player.position.X <= 224 - 96 && outOfStart == false)
                     {
                         player.position.X = 224 - 96;
+                        player.velocity.X = 0;
+                    }
+                    else if (player.position.X <= 224 && outOfStart == true)
+                    {
+                        player.position.X = 224;
                         player.velocity.X = 0;
                     }
                 }
