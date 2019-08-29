@@ -29,6 +29,7 @@ namespace Tetris
         Texture2D startPlace;
         Texture2D logo;
         Texture2D nextPiece;
+        Texture2D StartBackground;
 
         // Fonts
         SpriteFont GameFont;
@@ -127,7 +128,8 @@ namespace Tetris
             goal = Content.Load<Texture2D>("Images/end_flag_96x96");
             ground = Content.Load<Texture2D>("Images/ground_320x96");
             ground1 = Content.Load<Texture2D>("Images/ground_96x37");
-            startPlace = Content.Load<Texture2D>("Images/start_96x96");
+            StartBackground = Content.Load<Texture2D>("Images/start_96x96");
+            startPlace = Content.Load<Texture2D>("Images/StartingArea");
             logo = Content.Load<Texture2D>("Images/Logo_820");
             nextPiece = Content.Load<Texture2D>("Images/Nextboxbg");
         }
@@ -141,8 +143,10 @@ namespace Tetris
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                GameOver = true;
 
-            if (GameOver || GameWon)
+                if (GameOver || GameWon)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
@@ -395,6 +399,7 @@ namespace Tetris
             // spriteBatch.Draw(ground, new Vector2(250, 940), Color.White);
             // spriteBatch.Draw(ground, new Vector2(0, 940), Color.White);
             // spriteBatch.Draw(ground1, new Vector2(570, 808), Color.White);
+            spriteBatch.Draw(StartBackground, new Vector2(128, 800 - 16 - 96), Color.White);
             spriteBatch.Draw(startPlace, new Vector2(128, 800 - 16 - 96), Color.White);
             spriteBatch.Draw(nextPiece, new Vector2(16, 480), Color.White);
 

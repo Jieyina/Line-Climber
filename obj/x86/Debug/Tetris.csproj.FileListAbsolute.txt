@@ -587,3 +587,16 @@ C:\Users\najie\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.cspro
 C:\Users\najie\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.csproj.CopyComplete
 C:\Users\najie\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.exe
 C:\Users\najie\Downloads\Line-Climber-menu-developing\obj\x86\Debug\Tetris.pdb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\ground_96x64.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\end_flag_96x96.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\ground_320x96.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\ground_96x37.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\Logo_820.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\Nextboxbg.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\start_96x96.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\menu\button_exit.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\menu\button_outline.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\menu\button_restart.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\menu\button_resume.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\menu\button_start.xnb
+C:\Users\u1274842\Downloads\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\StartingArea.xnb
