@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="MenuObject.cs" />

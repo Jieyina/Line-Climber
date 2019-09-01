@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Line-Climber-master/Content/Fonts/MyFont.spritefont","D:/Line-Climber-master/Content/bin/Windows/Content/Fonts/MyFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,37905,0.4076579
+"D:/Line-Climber-master/Content/Fonts/MyFont.spritefont","D:/Line-Climber-master/Content/bin/Windows/Content/Fonts/MyFont.xnb","FontDescriptionProcessor","SpriteFontContent",2076,21521,0.3783132
 "D:/Line-Climber-master/Content/Images/background.jpg","D:/Line-Climber-master/Content/bin/Windows/Content/Images/background.xnb","TextureProcessor","Texture2DContent",34533,983125,0.2051411
 "D:/Line-Climber-master/Content/Images/block_1_32x32.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_1_32x32.xnb","TextureProcessor","Texture2DContent",283,4181,0.010004
 "D:/Line-Climber-master/Content/Images/block_blue.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_blue.xnb","TextureProcessor","Texture2DContent",318,4181,0.0079535
@@ -10,20 +10,16 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "D:/Line-Climber-master/Content/Images/block_red.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_red.xnb","TextureProcessor","Texture2DContent",309,4181,0.0069823
 "D:/Line-Climber-master/Content/Images/block_white.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_white.xnb","TextureProcessor","Texture2DContent",287,4181,0.007959
 "D:/Line-Climber-master/Content/Images/block_yellow.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_yellow.xnb","TextureProcessor","Texture2DContent",312,4181,0.0059851
-"D:/Line-Climber-master/Content/Images/blockAzur.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockAzur.xnb","TextureProcessor","Texture2DContent",197,1109,0.0080173
-"D:/Line-Climber-master/Content/Images/blockBlue.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockBlue.xnb","TextureProcessor","Texture2DContent",198,1109,0.0070494
-"D:/Line-Climber-master/Content/Images/blockGreen.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockGreen.xnb","TextureProcessor","Texture2DContent",197,1109,0.0069813
-"D:/Line-Climber-master/Content/Images/blockOrange.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockOrange.xnb","TextureProcessor","Texture2DContent",195,1109,0.006983
-"D:/Line-Climber-master/Content/Images/blockPurple.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockPurple.xnb","TextureProcessor","Texture2DContent",198,1109,0.0069831
-"D:/Line-Climber-master/Content/Images/blockRed.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockRed.xnb","TextureProcessor","Texture2DContent",193,1109,0.0069815
-"D:/Line-Climber-master/Content/Images/blockWhite.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockWhite.xnb","TextureProcessor","Texture2DContent",215,1109,0.0069791
-"D:/Line-Climber-master/Content/Images/blockYellow.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/blockYellow.xnb","TextureProcessor","Texture2DContent",196,1109,0.0069811
 "D:/Line-Climber-master/Content/Images/donekindof.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/donekindof.xnb","TextureProcessor","Texture2DContent",1458,4181,0.0069823
 "D:/Line-Climber-master/Content/Images/end_flag_96x96.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/end_flag_96x96.xnb","TextureProcessor","Texture2DContent",876,36949,0.0119681
 "D:/Line-Climber-master/Content/Images/ground_320x96.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/ground_320x96.xnb","TextureProcessor","Texture2DContent",1159,82005,0.0099708
 "D:/Line-Climber-master/Content/Images/ground_96x37.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/ground_96x37.xnb","TextureProcessor","Texture2DContent",943,14293,0.007952
 "D:/Line-Climber-master/Content/Images/Logo_820.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/Logo_820.xnb","TextureProcessor","Texture2DContent",11132,1318997,0.5425495
 "D:/Line-Climber-master/Content/Images/Nextboxbg.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/Nextboxbg.xnb","TextureProcessor","Texture2DContent",1250,147541,0.1286228
+"D:/Line-Climber-master/Content/Images/skip1.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/skip1.xnb","TextureProcessor","Texture2DContent",2274,126069,0.139627
+"D:/Line-Climber-master/Content/Images/skip2.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/skip2.xnb","TextureProcessor","Texture2DContent",2272,126069,0.0199473
+"D:/Line-Climber-master/Content/Images/skip3.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/skip3.xnb","TextureProcessor","Texture2DContent",2287,126069,0.0159579
+"D:/Line-Climber-master/Content/Images/skipboard.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/skipboard.xnb","TextureProcessor","Texture2DContent",3504,126069,0.0159557
 "D:/Line-Climber-master/Content/Images/start_96x96.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/start_96x96.xnb","TextureProcessor","Texture2DContent",411,36949,0.0099722
 "D:/Line-Climber-master/Content/Images/StartingArea.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/StartingArea.xnb","TextureProcessor","Texture2DContent",4801,36949,0.0089435
 "D:/Line-Climber-master/Content/Images/titleScreen.png","D:/Line-Climber-master/Content/bin/Windows/Content/Images/titleScreen.xnb","TextureProcessor","Texture2DContent",3247,1920085,0.0498948

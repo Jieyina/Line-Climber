@@ -15,7 +15,7 @@ namespace Tetris
         Rectangle BoardLocation = new Rectangle(320*3/2, 0, 480 * 3 / 2, 640 * 3 / 2);
         Rectangle[] nextBlockBoardsLocation = new Rectangle[]
         {
-            new Rectangle(100*3/2, 68*3/2, 120*3/2, 120*3/2),
+            new Rectangle(100*3/2, 88*3/2, 120*3/2, 120*3/2),
             new Rectangle(100*3/2, 168*3/2, 120*3/2, 120*3/2)
         };
 
@@ -45,6 +45,10 @@ namespace Tetris
         Texture2D logo;
         Texture2D nextPiece;
         Texture2D StartBackground;
+        Texture2D skipBoard;
+        Texture2D skip1;
+        Texture2D skip2;
+        Texture2D skip3;
 
         // Menu textures
         MenuObject buttonStart, buttonExit, buttonResume, buttonOutline, buttonRestart;
@@ -162,6 +166,10 @@ namespace Tetris
             startPlace = Content.Load<Texture2D>("Images/StartingArea");
             logo = Content.Load<Texture2D>("Images/Logo_820");
             nextPiece = Content.Load<Texture2D>("Images/Nextboxbg");
+            skipBoard = Content.Load<Texture2D>("Images/skipboard");
+            skip1 = Content.Load<Texture2D>("Images/skip1");
+            skip2 = Content.Load<Texture2D>("Images/skip2");
+            skip3 = Content.Load<Texture2D>("Images/skip3");
         }
 
         protected override void UnloadContent()
@@ -556,6 +564,13 @@ namespace Tetris
                 spriteBatch.Draw(StartBackground, new Rectangle(160 * 3 / 2, (640 - 160) * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
                 spriteBatch.Draw(startPlace, new Rectangle(160 * 3 / 2, (640 - 160) * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
                 spriteBatch.Draw(nextPiece, new Rectangle(32 * 3 / 2, 32 * 3 / 2, 256 * 3 / 2, 256 * 3 / 2), Color.White);
+                spriteBatch.Draw(skipBoard, new Rectangle(32 * 3 / 2, 320 * 3 / 2, 256 * 3 / 2, 128 * 3 / 2), Color.White);
+                if (skip == 0)
+                    spriteBatch.Draw(skip1, new Rectangle(32 * 3 / 2, 320 * 3 / 2, 256 * 3 / 2, 128 * 3 / 2), Color.White);
+                if (skip <= 1)
+                    spriteBatch.Draw(skip2, new Rectangle(32 * 3 / 2, 320 * 3 / 2, 256 * 3 / 2, 128 * 3 / 2), Color.White);
+                if (skip <= 2)
+                    spriteBatch.Draw(skip3, new Rectangle(32 * 3 / 2, 320 * 3 / 2, 256 * 3 / 2, 128 * 3 / 2), Color.White);
 
                 // Draw the board
                 gameBoard.Draw(spriteBatch, BoardLocation, texture1px);

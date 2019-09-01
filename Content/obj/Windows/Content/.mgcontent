@@ -15,20 +15,16 @@
     <File>D:/Line-Climber-master/Content/Images/block_red.png</File>
     <File>D:/Line-Climber-master/Content/Images/block_white.png</File>
     <File>D:/Line-Climber-master/Content/Images/block_yellow.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockAzur.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockBlue.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockGreen.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockOrange.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockPurple.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockRed.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockWhite.png</File>
-    <File>D:/Line-Climber-master/Content/Images/blockYellow.png</File>
     <File>D:/Line-Climber-master/Content/Images/donekindof.png</File>
     <File>D:/Line-Climber-master/Content/Images/end_flag_96x96.png</File>
     <File>D:/Line-Climber-master/Content/Images/ground_320x96.png</File>
     <File>D:/Line-Climber-master/Content/Images/ground_96x37.png</File>
     <File>D:/Line-Climber-master/Content/Images/Logo_820.png</File>
     <File>D:/Line-Climber-master/Content/Images/Nextboxbg.png</File>
+    <File>D:/Line-Climber-master/Content/Images/skip1.png</File>
+    <File>D:/Line-Climber-master/Content/Images/skip2.png</File>
+    <File>D:/Line-Climber-master/Content/Images/skip3.png</File>
+    <File>D:/Line-Climber-master/Content/Images/skipboard.png</File>
     <File>D:/Line-Climber-master/Content/Images/start_96x96.png</File>
     <File>D:/Line-Climber-master/Content/Images/StartingArea.png</File>
     <File>D:/Line-Climber-master/Content/Images/titleScreen.png</File>
@@ -39,10 +35,6 @@
     <File>D:/Line-Climber-master/Content/menu/button_start.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

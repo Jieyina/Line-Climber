@@ -651,3 +651,7 @@ D:\Line-Climber-master\obj\x86\Debug\Tetris.csproj.CoreCompileInputs.cache
 D:\Line-Climber-master\obj\x86\Debug\Tetris.csproj.CopyComplete
 D:\Line-Climber-master\obj\x86\Debug\Tetris.exe
 D:\Line-Climber-master\obj\x86\Debug\Tetris.pdb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\skip1.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\skip2.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\skip3.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\skipboard.xnb
