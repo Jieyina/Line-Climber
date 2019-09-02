@@ -11,15 +11,15 @@ namespace Tetris
 {
     class player
     {
-        public Texture2D texture;
         public Vector2 position;
         public Vector2 velocity;
         public int collideBlock;
         public int collideIndex;
+        SpriteEffects flip = SpriteEffects.None;
+        AnimationPlayer sprite;
 
-        public player(Texture2D playerTexture, Vector2 playerPosition)
+        public player(Vector2 playerPosition)
         {
-            texture = playerTexture;
             position = playerPosition;
         }
 
@@ -68,9 +68,16 @@ namespace Tetris
             return false;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+            // Flip the sprite to face the way we are moving.
+            if (velocity.X > 0)
+                flip = SpriteEffects.FlipHorizontally;
+            else if (velocity.X < 0)
+                flip = SpriteEffects.None;
+
+            // Draw that sprite.
+            sprite.Draw(gameTime, spriteBatch, position, flip);
         }
 
     }

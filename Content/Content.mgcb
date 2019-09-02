@@ -140,6 +140,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/block_yellow.png
 
+#begin Images/deathanimation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/deathanimation.png
+
 #begin Images/donekindof.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -223,6 +235,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Nextboxbg.png
+
+#begin Images/runanimation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/runanimation.png
 
 #begin Images/skip1.png
 /importer:TextureImporter
@@ -379,4 +403,40 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:menu/button_start.png
+
+#begin Sound/Music/Gameplay.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Music/Gameplay.mp3
+
+#begin Sound/Music/Main Menu Music.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Music/Main Menu Music.mp3
+
+#begin Sound/SFX/Line_Completed.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/SFX/Line_Completed.wav
+
+#begin Sound/SFX/Player_Defeat.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/SFX/Player_Defeat.wav
+
+#begin Sound/SFX/Player_Jump_A.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/SFX/Player_Jump_A.wav
+
+#begin Sound/SFX/Player_Victory.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/SFX/Player_Victory.wav
 
