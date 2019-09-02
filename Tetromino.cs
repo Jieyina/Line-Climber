@@ -153,7 +153,7 @@ namespace Tetris
             while (!canRotate && rotationAttempt <= 5)
             {
                 // ----------------------------------------
-                // Wall Kick values (tableau à prendre en compte !)
+                // Wall Kick values
                 // ----------------------------------------
                 wallKick = GetWallKick(RotStatus, newRotStatus, rotationAttempt, rotation, Tag);
                 int xPush = (int)Math.Round(wallKick.X);
@@ -234,8 +234,10 @@ namespace Tetris
                     // We check if the block belong to the tetromino
                     bool belongToTetromino = false;
                     for (int i = 0; i < blocksX.Length; i++)
-                        if (newX == blocksX[i] && newY == blocksY[i]) belongToTetromino = true;
-                    if (!belongToTetromino) return false;
+                        if (newX == blocksX[i] && newY == blocksY[i])
+                            belongToTetromino = true;
+                    if (!belongToTetromino)
+                        return false;
                 } 
             }
             return true;

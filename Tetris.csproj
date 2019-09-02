@@ -44,7 +44,7 @@
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="GameObject.cs" />
+    <Compile Include="MenuObject.cs" />
     <Compile Include="player.cs" />
     <Compile Include="Tetromino.cs" />
     <Compile Include="Game1.cs" />
