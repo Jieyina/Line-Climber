@@ -475,7 +475,7 @@ namespace Tetris
                     }
                     player.sprite.PlayAnimation(runAnimation);
                 }
-                else if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == false && player.IsColliding(nextPosition, gameBoard) == false)
+                else if (player.sprite.Animation != dieAnimation)
                 {
                     player.velocity.X = 0;
                     player.sprite.PlayAnimation(idleAnimation);
@@ -682,7 +682,7 @@ namespace Tetris
             }
 
             // Display the debug Window
-            DrawDebugWindow(spriteBatch);
+            // DrawDebugWindow(spriteBatch);
 
             if (GameState == STATE_GAMEWON)
             {
