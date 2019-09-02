@@ -337,6 +337,8 @@ namespace Tetris
                     lastGravityEffectTime = 0;
                     lastSkipTime = 0;
                     skip = 0;
+                    dieTime = 0;
+                    winTime = 0;
                     player.sprite.PlayAnimation(idleAnimation);
                 }
 
@@ -356,7 +358,7 @@ namespace Tetris
                 }
 
                 // Apply gravity
-                if (gameTime.TotalGameTime.TotalMilliseconds - lastGravityEffectTime > 1000 / FallSpeed && player.TopColliding(player.position.X, player.position.Y, gameBoard) == false)
+                if (gameTime.TotalGameTime.TotalMilliseconds - lastGravityEffectTime > 1000 / FallSpeed && player.sprite.Animation != dieAnimation)
                 {
                     currentTetromino?.MoveTo(currentTetromino.X, currentTetromino.Y - 1);
                     lastGravityEffectTime = gameTime.TotalGameTime.TotalMilliseconds;
@@ -473,7 +475,7 @@ namespace Tetris
                     }
                     player.sprite.PlayAnimation(runAnimation);
                 }
-                else
+                else if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == false && player.IsColliding(nextPosition, gameBoard) == false)
                 {
                     player.velocity.X = 0;
                     player.sprite.PlayAnimation(idleAnimation);
@@ -511,11 +513,7 @@ namespace Tetris
                         if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
                         {
                             player.sprite.PlayAnimation(dieAnimation);
-                            dieTime = gameTime.TotalGameTime.Milliseconds;
-                            if (gameTime.TotalGameTime.Milliseconds - dieTime > 500)
-                            {
-                                GameState = STATE_GAMEOVER;
-                            }
+                            dieTime = gameTime.TotalGameTime.TotalMilliseconds;
                         }
                     }
                 }
@@ -599,28 +597,32 @@ namespace Tetris
                     if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
                     {
                         player.sprite.PlayAnimation(dieAnimation);
-                        dieTime = gameTime.TotalGameTime.Milliseconds;
-                        if (gameTime.TotalGameTime.Milliseconds - dieTime > 500)
-                        {
-                            GameState = STATE_GAMEOVER;
-                        }
+                        dieTime = gameTime.TotalGameTime.TotalMilliseconds;
                     }
                 }
 
                 if (player.position.X > (320 + 480) * 3 / 2 && player.position.X < (320 + 480 + 160) * 3 / 2 && player.position.Y > endHeight && player.position.Y < endHeight + (160 - 32) * 3 / 2)
                 {
                     player.sprite.PlayAnimation(winAnimation);
-                    winTime = gameTime.TotalGameTime.Milliseconds;
-                    if (gameTime.TotalGameTime.Milliseconds - winTime > 500)
-                    {
-                        GameState = STATE_GAMEWON;
-                    }
+                    winTime = gameTime.TotalGameTime.TotalMilliseconds;
+                }
+
+                if (player.sprite.Animation == winAnimation && gameTime.TotalGameTime.TotalMilliseconds - winTime > 500)
+                {
+                    GameState = STATE_GAMEWON;
                 }
             }
 
             if (GameState == STATE_PAUSED)
             {
                 player.velocity = Vector2.Zero;
+            }
+            Console.WriteLine(player.sprite.Animation);
+            Console.WriteLine(dieTime);
+            Console.WriteLine(gameTime.TotalGameTime.TotalMilliseconds);
+            if (player.sprite.Animation == dieAnimation && gameTime.TotalGameTime.TotalMilliseconds - dieTime > 500)
+            {
+                GameState = STATE_GAMEOVER;
             }
 
             base.Update(gameTime);
@@ -680,7 +682,7 @@ namespace Tetris
             }
 
             // Display the debug Window
-            // DrawDebugWindow(spriteBatch);
+            DrawDebugWindow(spriteBatch);
 
             if (GameState == STATE_GAMEWON)
             {
@@ -714,9 +716,9 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("Tetromino: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}totalTime:{10}{0}IsFalling: {11}{0}Next: {12}",
+                String.Format("Animation: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}totalTime:{10}{0}IsFalling: {11}{0}GameState:{12}",
                 Environment.NewLine,
-                currentTetromino?.Tag,
+                player.sprite.Animation,
                 currentTetromino?.X,
                 currentTetromino?.Y,
                 player?.position.X,
@@ -727,7 +729,7 @@ namespace Tetris
                 player?.velocity.Y,
                 totalTime,
                 currentTetromino?.IsFalling,
-                string.Join(" ", nextTetrominos.ToArray())),
+                GameState),
                 new Vector2(10, 30),
                 Color.GreenYellow);
         }
