@@ -190,7 +190,8 @@ namespace Tetris
             // player textures
             idleAnimation = new Animation(Content.Load<Texture2D>("Images/donekindof"), 0.1f, true);
             runAnimation = new Animation(Content.Load<Texture2D>("Images/runanimation"), 0.1f, true);
-            dieAnimation = new Animation(Content.Load<Texture2D>("Images/dieanimation"), 0.1f, false);
+            dieAnimation = new Animation(Content.Load<Texture2D>("Images/deathanimation"), 0.1f, false);
+            player.sprite.PlayAnimation(idleAnimation);
         }
 
         protected override void UnloadContent()
@@ -330,6 +331,7 @@ namespace Tetris
                     lastGravityEffectTime = 0;
                     lastSkipTime = 0;
                     skip = 0;
+                    player.sprite.PlayAnimation(idleAnimation);
                 }
 
                 // Tetromino generation
@@ -444,6 +446,7 @@ namespace Tetris
                         player.position.X = (320 + gameBoard.Blocks[player.collideBlock].X * 32 - 32) * 3 / 2;
                         player.velocity.X = 0;
                     }
+                    player.sprite.PlayAnimation(runAnimation);
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.A))
                 {
@@ -459,9 +462,13 @@ namespace Tetris
                         player.position.X = (320 + gameBoard.Blocks[player.collideBlock].X * 32 + 32) * 3 / 2;
                         player.velocity.X = 0;
                     }
+                    player.sprite.PlayAnimation(runAnimation);
                 }
                 else
+                {
                     player.velocity.X = 0;
+                    player.sprite.PlayAnimation(idleAnimation);
+                }
                 player.position.X += player.velocity.X;
 
                 if (player.position.X >= 320 * 3 / 2)
@@ -495,6 +502,7 @@ namespace Tetris
                             GameState = STATE_GAMEOVER;
                         }
                     }
+                    player.sprite.PlayAnimation(runAnimation);
                 }
 
                 temptVelocity.Y = player.velocity.Y + gravity;

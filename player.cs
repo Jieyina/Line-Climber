@@ -15,8 +15,8 @@ namespace Tetris
         public Vector2 velocity;
         public int collideBlock;
         public int collideIndex;
-        SpriteEffects flip = SpriteEffects.None;
-        AnimationPlayer sprite;
+        public SpriteEffects flip = SpriteEffects.None;
+        public AnimationPlayer sprite;
 
         public player(Vector2 playerPosition)
         {
