@@ -71,7 +71,7 @@ namespace Tetris
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             // Flip the sprite to face the way we are moving.
-            if (velocity.X > 0)
+            if (velocity.X >= 0)
                 flip = SpriteEffects.FlipHorizontally;
             else if (velocity.X < 0)
                 flip = SpriteEffects.None;

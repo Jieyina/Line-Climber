@@ -19,6 +19,7 @@
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/end_flag_96x96.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/ground_320x96.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/ground_96x37.png</File>
+    <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/jumpanimation.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/Logo_820.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/lose.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/Nextboxbg.png</File>
@@ -31,6 +32,7 @@
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/StartingArea.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/titleScreen.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/win.png</File>
+    <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/winanimation.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/menu/button_exit.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/menu/button_outline.png</File>
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/menu/button_restart.png</File>
@@ -44,6 +46,8 @@
     <File>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Sound/SFX/Player_Victory.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -809,3 +809,5 @@ C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Im
 C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skip3.xnb
 C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skipboard.xnb
 C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\win.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\jumpanimation.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\winanimation.xnb
