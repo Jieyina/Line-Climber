@@ -409,6 +409,9 @@ namespace Tetris
                         Lines += rowCleared;
                         // decrease end goal
                         endHeight += 64 * 3 / 2 * rowCleared;
+                        skip--;
+                        if (skip <= 0)
+                            skip = 0;
                         if (endHeight >= (640 - 160) * 3 / 2)
                             endHeight = (640 - 160) * 3 / 2;
                     }
@@ -648,7 +651,10 @@ namespace Tetris
             {
                 // Draw game over screen
                 spriteBatch.DrawString(GameFont, "You Lose!", new Vector2(450*3/2, 30*3/2), Color.Red);
-                spriteBatch.DrawString(GameFont, "Time: ", new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                if (totalTime % 60 < 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : 0" + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                else if (totalTime % 60 >= 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : " + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
                 spriteBatch.DrawString(GameFont, "Lines: " + Lines, new Vector2(450 * 3 / 2, 190 * 3 / 2), Color.White);
                 spriteBatch.Draw(win, new Rectangle(480 * 3 / 2, 260 * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
             }
@@ -660,7 +666,10 @@ namespace Tetris
             {
                 // Draw game over screen
                 spriteBatch.DrawString(GameFont, "You Win!", new Vector2(450 * 3 / 2, 30 * 3 / 2), Color.Yellow);
-                spriteBatch.DrawString(GameFont, "Time: ", new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                if (totalTime % 60 < 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : 0" + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                else if (totalTime % 60 >= 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : " + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
                 spriteBatch.DrawString(GameFont, "Lines: " + Lines, new Vector2(450 * 3 / 2, 190 * 3 / 2), Color.White);
                 spriteBatch.Draw(win, new Rectangle(480 * 3 / 2, 260 * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
             }

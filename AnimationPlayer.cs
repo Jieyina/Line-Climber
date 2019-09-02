@@ -37,7 +37,7 @@ namespace Tetris
         /// </summary>
         public Vector2 Origin
         {
-            get { return new Vector2(Animation.FrameWidth / 2.0f, Animation.FrameHeight); }
+            get { return new Vector2(Animation.FrameWidth, Animation.FrameHeight); }
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Tetris
             Rectangle source = new Rectangle(FrameIndex * Animation.Texture.Height, 0, Animation.Texture.Height, Animation.Texture.Height);
 
             // Draw the current frame.
-            spriteBatch.Draw(Animation.Texture, position, source, Color.White, 0.0f, Origin, 1.0f, spriteEffects, 0.0f);
+            spriteBatch.Draw(Animation.Texture, position, source, Color.White, 0.0f, Vector2.Zero, 1.5f, spriteEffects, 0.0f);
         }
     }
 }

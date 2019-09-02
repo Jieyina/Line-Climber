@@ -793,3 +793,19 @@ C:\Users\u1274842\Downloads\Line-Climber-animation-developing\obj\x86\Debug\Tetr
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\obj\x86\Debug\Tetris.csproj.CopyComplete
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\obj\x86\Debug\Tetris.exe
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\obj\x86\Debug\Tetris.pdb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\SFX\Line_Completed.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Defeat.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Jump_A.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Victory.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\Music\Gameplay.wma
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\Music\Gameplay.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\Music\Main Menu Music.wma
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Sound\Music\Main Menu Music.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\deathanimation.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\lose.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\runanimation.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skip1.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skip2.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skip3.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\skipboard.xnb
+C:\Users\u1274842\Documents\GitHub\Line-Climber\bin\Windows\x86\Debug\Content\Images\win.xnb
