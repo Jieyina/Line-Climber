@@ -345,7 +345,7 @@ namespace Tetris
                 {
                     player.position = position1;
                     player.velocity = Vector2.Zero;
-                    endHeight = 0;
+                    endHeight = 352*3/2;
                     Lines = 0;
                     gameBoard.Reset();
                     currentTetromino?.MoveTo(currentTetromino.Xghost, currentTetromino.Yghost);
@@ -573,10 +573,13 @@ namespace Tetris
                 else if (player.IsColliding(nextPosition, gameBoard) == true && player.velocity.Y >= 0)
                 {
                     hasJumped = false;
-                    player.position.Y = (20 - gameBoard.Blocks[player.collideBlock].Y - 2) * 32 * 3 / 2;
-                    player.velocity.Y = 0;
-                    if (player.sprite.Animation == jumpAnimation)
-                        player.sprite.PlayAnimation(idleAnimation);
+                    if (player.velocity.Y > 0)
+                    {
+                        player.position.Y = (20 - gameBoard.Blocks[player.collideBlock].Y - 2) * 32 * 3 / 2;
+                        player.velocity.Y = 0;
+                        if (player.sprite.Animation == jumpAnimation)
+                            player.sprite.PlayAnimation(idleAnimation);
+                    }    
                 }
 
                 if (player.position.Y < endHeight)
