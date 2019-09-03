@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<<<<<<< Updated upstream
-  <SourceFile>D:/Line-Climber-master/Content/Images/block_white.png</SourceFile>
-  <SourceTime>2019-08-29T10:46:52-06:00</SourceTime>
-  <DestFile>D:/Line-Climber-master/Content/bin/Windows/Content/Images/block_white.xnb</DestFile>
-  <DestTime>2019-08-30T19:13:22.6812317-06:00</DestTime>
-=======
-  <SourceFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/block_white.png</SourceFile>
-  <SourceTime>2019-09-02T17:53:17.6366788-06:00</SourceTime>
-  <DestFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/bin/Windows/Content/Images/block_white.xnb</DestFile>
-  <DestTime>2019-09-02T17:59:48.3727075-06:00</DestTime>
->>>>>>> Stashed changes
+  <SourceFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/Images/block_white.png</SourceFile>
+  <SourceTime>2019-09-02T14:45:25-06:00</SourceTime>
+  <DestFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/Images/block_white.xnb</DestFile>
+  <DestTime>2019-09-02T19:34:03.8159674-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<<<<<<< Updated upstream
-  <SourceFile>D:/Line-Climber-master/Content/menu/button_resume.png</SourceFile>
-  <SourceTime>2019-08-31T22:10:31.7069393-06:00</SourceTime>
-  <DestFile>D:/Line-Climber-master/Content/bin/Windows/Content/menu/button_resume.xnb</DestFile>
-  <DestTime>2019-08-31T22:20:20.4411415-06:00</DestTime>
-=======
-  <SourceFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/menu/button_resume.png</SourceFile>
-  <SourceTime>2019-09-02T17:53:17.7156178-06:00</SourceTime>
-  <DestFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/bin/Windows/Content/menu/button_resume.xnb</DestFile>
-  <DestTime>2019-09-02T17:59:48.775428-06:00</DestTime>
->>>>>>> Stashed changes
+  <SourceFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/menu/button_resume.png</SourceFile>
+  <SourceTime>2019-09-02T19:56:15.4706714-06:00</SourceTime>
+  <DestFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/menu/button_resume.xnb</DestFile>
+  <DestTime>2019-09-02T20:08:34.755394-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

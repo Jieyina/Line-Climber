@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/Images/deathanimation.png</SourceFile>
-  <SourceTime>2019-09-02T17:53:23.2946265-06:00</SourceTime>
-  <DestFile>C:/Users/u1274842/Documents/GitHub/Line-Climber/Content/bin/Windows/Content/Images/deathanimation.xnb</DestFile>
-  <DestTime>2019-09-02T17:59:48.3856872-06:00</DestTime>
+  <SourceFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/Images/deathanimation.png</SourceFile>
+  <SourceTime>2019-09-02T14:45:25-06:00</SourceTime>
+  <DestFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/Images/deathanimation.xnb</DestFile>
+  <DestTime>2019-09-02T19:34:03.842949-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
