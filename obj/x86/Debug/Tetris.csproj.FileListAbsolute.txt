@@ -815,3 +815,17 @@ C:\Users\u1274842\Downloads\Line-Climber-animation-developing\bin\Windows\x86\De
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\bin\Windows\x86\Debug\Content\Images\winanimation.xnb
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\bin\Windows\x86\Debug\Content\Images\bg_grid.xnb
 C:\Users\u1274842\Downloads\Line-Climber-animation-developing\bin\Windows\x86\Debug\Content\Images\Controls.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\SFX\Line_Completed.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Defeat.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Jump_A.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\SFX\Player_Victory.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\Music\Gameplay.wma
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\Music\Gameplay.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\Music\Main Menu Music.wma
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Sound\Music\Main Menu Music.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\bg_grid.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\Controls.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\deathanimation.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\jumpanimation.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\runanimation.xnb
+D:\Line-Climber-master\bin\Windows\x86\Debug\Content\Images\winanimation.xnb

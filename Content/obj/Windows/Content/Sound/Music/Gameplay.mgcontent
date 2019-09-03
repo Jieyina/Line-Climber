@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/Sound/Music/Gameplay.mp3</SourceFile>
-  <SourceTime>2019-09-02T14:45:25-06:00</SourceTime>
-  <DestFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/Sound/Music/Gameplay.xnb</DestFile>
-  <DestTime>2019-09-02T19:34:05.129675-06:00</DestTime>
+  <SourceFile>D:/Line-Climber-master/Content/Sound/Music/Gameplay.mp3</SourceFile>
+  <SourceTime>2019-09-02T19:23:10-06:00</SourceTime>
+  <DestFile>D:/Line-Climber-master/Content/bin/Windows/Content/Sound/Music/Gameplay.xnb</DestFile>
+  <DestTime>2019-09-03T00:37:26.7512036-06:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/Sound/Music/Gameplay.wma</string>
+    <string>D:/Line-Climber-master/Content/bin/Windows/Content/Sound/Music/Gameplay.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

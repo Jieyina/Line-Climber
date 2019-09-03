@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/menu/button_start.png</SourceFile>
-  <SourceTime>2019-09-02T19:56:21.73918-06:00</SourceTime>
-  <DestFile>C:/Users/u1274842/Downloads/Line-Climber-animation-developing/Content/bin/Windows/Content/menu/button_start.xnb</DestFile>
-  <DestTime>2019-09-02T20:08:34.7703969-06:00</DestTime>
+  <SourceFile>D:/Line-Climber-master/Content/menu/button_start.png</SourceFile>
+  <SourceTime>2019-09-02T19:23:10-06:00</SourceTime>
+  <DestFile>D:/Line-Climber-master/Content/bin/Windows/Content/menu/button_start.xnb</DestFile>
+  <DestTime>2019-09-03T00:37:25.6552283-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
