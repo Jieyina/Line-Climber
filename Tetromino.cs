@@ -16,6 +16,7 @@ namespace Tetris
         public int RotStatus = 0;
         public bool IsFalling = true;
         public double TimeSinceStopFalling = 0;
+        public bool fallTimeCount = false;
 
         public int Xghost => X;
         public int Yghost
@@ -193,15 +194,12 @@ namespace Tetris
             // If the tetromino cannot move or rotate
             if (!CanMoveTo(X, Y - 1))
             {
-                if (TimeSinceStopFalling == 0)
+                IsFalling = false;
+                if (fallTimeCount == false)
+                {
                     TimeSinceStopFalling = gameTime.TotalGameTime.TotalMilliseconds;
-                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 500)
-                    IsFalling = false;
-            }
-            else
-            {
-                IsFalling = true;
-                TimeSinceStopFalling = 0;
+                    fallTimeCount = true;
+                }
             }
         }
 

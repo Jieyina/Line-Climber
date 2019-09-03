@@ -369,7 +369,7 @@ namespace Tetris
                 }
 
                 // Tetromino generation
-                if ((currentTetromino == null || !currentTetromino.IsFalling) && outOfStart == true)
+                if ((currentTetromino == null || (!currentTetromino.IsFalling && gameTime.TotalGameTime.TotalMilliseconds - currentTetromino.TimeSinceStopFalling > 500)) && outOfStart == true)
                 {
                     currentTetromino = GenerateNewTetromino(nextTetrominos.Dequeue());
                     nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, randomGenerator));
@@ -836,7 +836,7 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("hasJumped: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}totalTime:{10}{0}IsFalling: {11}{0}GameState:{12}",
+                String.Format("hasJumped: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}topColliding:{10}{0}IsFalling: {11}{0}GameState:{12}",
                 Environment.NewLine,
                 hasJumped,
                 currentTetromino?.X,
@@ -847,7 +847,7 @@ namespace Tetris
                 nextPosition.Y,
                 player?.velocity.X,
                 player?.velocity.Y,
-                totalTime,
+                player.TopColliding(player.position.X, player.position.Y, gameBoard),
                 currentTetromino?.IsFalling,
                 GameState),
                 new Vector2(10, 30),

@@ -57,7 +57,7 @@ namespace Tetris
                 float rightX = playerX + 32 * 3 / 2;
                 float rightEdge = (320 + Board.Blocks[i].X * 32 + 32) * 3 / 2;
                 float leftEdge = (320 + Board.Blocks[i].X * 32) * 3 / 2;
-                float bottomEdge = (20 - Board.Blocks[i].Y - 1) * 32 * 3 / 2;
+                float bottomEdge = (20 - Board.Blocks[i].Y) * 32 * 3 / 2;
                 // Console.WriteLine("{0},{1}", playerY, bottomEdge);
                 if ((topY == bottomEdge && leftX > leftEdge && leftX < rightEdge) || (topY == bottomEdge && rightX > leftEdge && rightX < rightEdge) || (topY == bottomEdge && leftX == leftEdge && rightX == rightEdge))
                 {
