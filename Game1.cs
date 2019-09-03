@@ -345,7 +345,7 @@ namespace Tetris
                 {
                     player.position = position1;
                     player.velocity = Vector2.Zero;
-                    endHeight = 352*3/2;
+                    endHeight = 0;
                     Lines = 0;
                     gameBoard.Reset();
                     currentTetromino?.MoveTo(currentTetromino.Xghost, currentTetromino.Yghost);
@@ -715,6 +715,17 @@ namespace Tetris
                     }
                 }
 
+                if (player.IsColliding(player.position, gameBoard) == true)
+                {
+                    playerDefeat.Play();
+                    player.sprite.PlayAnimation(dieAnimation);
+                    if (dieCount == false)
+                    {
+                        dieTime = gameTime.TotalGameTime.TotalMilliseconds;
+                        dieCount = true;
+                    }
+                }
+
                 if (player.position.X >= (320 + 480) * 3 / 2 && player.position.X <= (320 + 480 + 160 - 32) * 3 / 2 && player.position.Y >= endHeight && player.position.Y <= endHeight + (160 - 32) * 3 / 2)
                 {
                     // player.velocity.X = 0;
@@ -836,11 +847,11 @@ namespace Tetris
         {
             spriteBatch.DrawString(
                 GameFont,
-                String.Format("hasJumped: {1}{0}X: {2}, Y: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}topColliding:{10}{0}IsFalling: {11}{0}GameState:{12}",
+                String.Format("hasJumped: {1}{0}collide: {2}{0}Tetromino: {3}{0}PlayerX: {4}{0}PlayerY: {5}{0}nextX:{6}{0}nextY:{7}{0}velocityX:{8}{0}velocityY:{9}{0}topColliding:{10}{0}IsFalling: {11}{0}GameState:{12}",
                 Environment.NewLine,
                 hasJumped,
-                currentTetromino?.X,
-                currentTetromino?.Y,
+                player.IsColliding(player.position, gameBoard),
+                currentTetromino?.Tag,
                 player?.position.X,
                 player?.position.Y,
                 nextPosition.X,

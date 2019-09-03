@@ -17,6 +17,7 @@ namespace Tetris
         public bool IsFalling = true;
         public double TimeSinceStopFalling = 0;
         public bool fallTimeCount = false;
+        public bool IsSliding = false;
 
         public int Xghost => X;
         public int Yghost
@@ -199,6 +200,8 @@ namespace Tetris
                 {
                     TimeSinceStopFalling = gameTime.TotalGameTime.TotalMilliseconds;
                     fallTimeCount = true;
+                    if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling <= 500)
+                        IsSliding = true;
                 }
             }
         }
