@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Media;
 
 namespace Tetris
 {
@@ -73,7 +75,18 @@ namespace Tetris
         double lastGravityEffectTime = 0;
         double ActionDelay = 150; // delay bewteen two actions in ms
         double lastSkipTime = 0;
+<<<<<<< Updated upstream
 
+=======
+        double startTime = 0;
+        double endTime = 0;
+        double timeInterval = 0;
+        double totalTime = 0;
+        bool timeCount = false;
+        double dieTime = 0;
+        double winTime = 0;
+        bool winTimeCount = false;
+>>>>>>> Stashed changes
 
         Queue<char> nextTetrominos = new Queue<char>();
         string CHARLIST = "IOJLZTS";
@@ -87,6 +100,27 @@ namespace Tetris
         Vector2 temptVelocity;
         Vector2 nextPosition;
 
+<<<<<<< Updated upstream
+=======
+        Animation idleAnimation;
+        Animation runAnimation;
+        Animation dieAnimation;
+        Animation jumpAnimation;
+        Animation winAnimation;
+
+        //Main Directory
+        string path = (new FileInfo(AppDomain.CurrentDomain.BaseDirectory)).Directory.Parent.Parent.Parent.Parent.FullName;
+        //Audio
+        public static SoundEffect playerDefeat;
+        SoundEffect playerVictory;
+        SoundEffect playerJump;
+        SoundEffect lineCompleted;
+        //Song gameplayMusic;
+        SoundPlayer menuMusic = null;
+        SoundPlayer gamePlayMusic = null;
+        int currentMusic = 100;
+
+>>>>>>> Stashed changes
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -170,6 +204,31 @@ namespace Tetris
             skip1 = Content.Load<Texture2D>("Images/skip1");
             skip2 = Content.Load<Texture2D>("Images/skip2");
             skip3 = Content.Load<Texture2D>("Images/skip3");
+<<<<<<< Updated upstream
+=======
+            win = Content.Load<Texture2D>("Images/win");
+            lose = Content.Load<Texture2D>("Images/lose");
+
+            // player textures
+            idleAnimation = new Animation(Content.Load<Texture2D>("Images/donekindof"), 0.1f, true);
+            runAnimation = new Animation(Content.Load<Texture2D>("Images/runanimation"), 0.1f, true);
+            dieAnimation = new Animation(Content.Load<Texture2D>("Images/deathanimation"), 0.1f, false);
+            jumpAnimation = new Animation(Content.Load<Texture2D>("Images/jumpanimation"), 0.1f, true);
+            winAnimation = new Animation(Content.Load<Texture2D>("Images/winanimation"), 0.1f, false);
+            player.sprite.PlayAnimation(idleAnimation);
+
+            //Audio
+            playerDefeat = Content.Load<SoundEffect>("Sound/SFX/Player_Defeat");
+            playerVictory = Content.Load<SoundEffect>("Sound/SFX/Player_Victory");
+            playerJump = Content.Load<SoundEffect>("Sound/SFX/Player_Jump_A");
+            lineCompleted = Content.Load<SoundEffect>("Sound/SFX/Line_Completed");
+
+            // MediaPlayer.Play(gameplayMusic);
+            menuMusic = new SoundPlayer(path + @"\Content\Main_Menu_Music.wav");
+            gamePlayMusic = new SoundPlayer(path + @"\Content\GamePlay.wav");
+
+            PlayMusic(0);
+>>>>>>> Stashed changes
         }
 
         protected override void UnloadContent()
@@ -242,6 +301,16 @@ namespace Tetris
                 case STATE_GAMEWON:
                     buttonRestart.Enable(spriteBatch);
                     buttonExit.Enable(spriteBatch);
+<<<<<<< Updated upstream
+=======
+                    if (timeCount == false)
+                    {
+                        endTime = gameTime.TotalGameTime.TotalSeconds;
+                        timeInterval = endTime - startTime;
+                        totalTime += timeInterval;
+                        timeCount = true;
+                    }
+>>>>>>> Stashed changes
                     if (Clicked(ref mouseState, buttonRestart))
                     {
                         GameState = STATE_PLAYING;
@@ -276,6 +345,13 @@ namespace Tetris
                     lastGravityEffectTime = 0;
                     lastSkipTime = 0;
                     skip = 0;
+<<<<<<< Updated upstream
+=======
+                    dieTime = 0;
+                    winTime = 0;
+                    winTimeCount = false;
+                    player.sprite.PlayAnimation(idleAnimation);
+>>>>>>> Stashed changes
                 }
 
                 // Tetromino generation
@@ -346,7 +422,7 @@ namespace Tetris
                     }
                         
                     // Get the row to remove
-                    int rowCleared = gameBoard.ClearRow();
+                    int rowCleared = gameBoard.ClearRow(lineCompleted);
                     if (rowCleared > 0)
                     {
                         // Update Lines
@@ -377,7 +453,7 @@ namespace Tetris
 
 
                 // player movement
-                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && player.sprite.Animation != dieAnimation)
                 {
                     temptVelocity.X = speed;
                     nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
@@ -391,7 +467,7 @@ namespace Tetris
                         player.velocity.X = 0;
                     }
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                else if (Keyboard.GetState().IsKeyDown(Keys.A) && player.sprite.Animation != dieAnimation)
                 {
                     temptVelocity.X = -speed;
                     nextPosition = new Vector2(player.position.X + temptVelocity.X, player.position.Y);
@@ -406,14 +482,19 @@ namespace Tetris
                         player.velocity.X = 0;
                     }
                 }
+<<<<<<< Updated upstream
                 else
+=======
+                else if (player.sprite.Animation != dieAnimation && player.sprite.Animation != winAnimation)
+                {
+>>>>>>> Stashed changes
                     player.velocity.X = 0;
                 player.position.X += player.velocity.X;
 
                 if (player.position.X >= 320 * 3 / 2)
                     outOfStart = true;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.W))
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && player.sprite.Animation != dieAnimation)
                 {
                     nextPosition = new Vector2(player.position.X, player.position.Y - jumpStrength);
                     // Console.WriteLine("{0},{1},{2}",player.IsColliding(nextPosition, gameBoard), hasJumped, nextPosition);
@@ -431,8 +512,15 @@ namespace Tetris
                             hasJumped = true;
                             // Console.WriteLine("jumped");
                         }
+<<<<<<< Updated upstream
+=======
+                        playerJump.Play();
+                        player.sprite.PlayAnimation(jumpAnimation);
+                    }
+>>>>>>> Stashed changes
                     else if (player.IsColliding(nextPosition, gameBoard) == true && hasJumped == false)
                     {
+                        playerJump.Play();
                         player.position.Y = (20 - gameBoard.Blocks[player.collideBlock].Y) * 32 * 3 / 2;
                         player.velocity.Y = 0;
                         hasJumped = true;
@@ -463,7 +551,7 @@ namespace Tetris
                 }
                 player.position.Y += player.velocity.Y;
 
-                if (player.position.Y <= endHeight)
+                if (player.position.Y + 32 * 3 / 2 <= endHeight)
                 {
                     if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
                     {
@@ -477,36 +565,90 @@ namespace Tetris
                     }
                 }
 
-                if (player.position.Y >= endHeight + 160 * 3 / 2 && player.position.Y <= (640 - 160) * 3 / 2)
+                if (endHeight + 160 * 3 / 2 <= (640 - 160) * 3 / 2)
                 {
-                    if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
+                    if (player.position.Y >= endHeight + 160 * 3 / 2 && player.position.Y + 32 * 3 / 2 <= (640 - 160) * 3 / 2)
                     {
-                        player.position.X = (1120 - 320 - 32) * 3 / 2;
-                        player.velocity.X = 0;
+                        if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
+                        {
+                            player.position.X = (1120 - 320 - 32) * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 320 * 3 / 2)
+                        {
+                            player.position.X = 320 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
                     }
-                    else if (player.position.X <= 320 * 3 / 2)
+                    else if (player.position.Y >= (640 - 160) * 3 / 2)
                     {
-                        player.position.X = 320 * 3 / 2;
-                        player.velocity.X = 0;
+                        if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
+                        {
+                            player.position.X = (1120 - 320 - 32) * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 160 * 3 / 2 && outOfStart == false)
+                        {
+                            player.position.X = 160 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 320 * 3 / 2 && outOfStart == true)
+                        {
+                            player.position.X = 320 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
                     }
-
                 }
-                else if (player.position.Y >= (640 - 160) * 3 / 2)
+                else if (endHeight + 160 * 3 / 2 > (640 - 160) * 3 / 2)
                 {
-                    if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
+                    if (player.position.Y + 32 * 3 / 2 <= (640 - 160) * 3 / 2 && player.position.Y >= endHeight)
                     {
-                        player.position.X = (1120 - 320 - 32) * 3 / 2;
-                        player.velocity.X = 0;
+                        if (player.position.X >= (1120 - 160 - 32) * 3 / 2)
+                        {
+                            player.position.X = (1120 - 160 - 32) * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 320 * 3 / 2)
+                        {
+                            player.position.X = 320 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
                     }
-                    else if (player.position.X <= 160 * 3 / 2 && outOfStart == false)
+                    else if (player.position.Y + 32 * 3 / 2 < (640 - 160) * 3 / 2 && player.position.Y >= endHeight + 160 * 3 / 2)
                     {
-                        player.position.X = 160 * 3 / 2;
-                        player.velocity.X = 0;
+                        if (player.position.X >= (1120 - 160 - 32) * 3 / 2)
+                        {
+                            player.position.X = (1120 - 160 - 32) * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 160 * 3 / 2 && outOfStart == false)
+                        {
+                            player.position.X = 160 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 320 * 3 / 2 && outOfStart == true)
+                        {
+                            player.position.X = 320 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
                     }
-                    else if (player.position.X <= 320 * 3 / 2 && outOfStart == true)
+                    else if (player.position.Y >= endHeight + 160 * 3 / 2)
                     {
-                        player.position.X = 320 * 3 / 2;
-                        player.velocity.X = 0;
+                        if (player.position.X >= (1120 - 320 - 32) * 3 / 2)
+                        {
+                            player.position.X = (1120 - 320 - 32) * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 160 * 3 / 2 && outOfStart == false)
+                        {
+                            player.position.X = 160 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
+                        else if (player.position.X <= 320 * 3 / 2 && outOfStart == true)
+                        {
+                            player.position.X = 320 * 3 / 2;
+                            player.velocity.X = 0;
+                        }
                     }
                 }
 
@@ -517,14 +659,54 @@ namespace Tetris
                     player.velocity.Y = 0;
                 }
 
+                if (player.position.X + 32 * 3 / 2 > (320+480)*3/2 && player.position.Y + player.velocity.Y >= endHeight + (160 - 32) * 3 / 2)
+                {
+                    hasJumped = false;
+                    player.position.Y = endHeight + (160 - 32) * 3 / 2;
+                    player.velocity.Y = 0;
+                }
+
+                SoundEffectInstance Defeat = playerDefeat.CreateInstance();
+                Defeat.IsLooped = false;
+
                 if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == true)
                 {
                     if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
                     {
+<<<<<<< Updated upstream
                         GameState = STATE_GAMEOVER;
                     }
                 }
                 else if (player.position.X > (320 + 480) * 3 / 2 && player.position.X < (320 + 480 + 160) * 3 / 2 && player.position.Y > endHeight && player.position.Y < endHeight + (160 - 32) * 3 / 2)
+=======
+                        gamePlayMusic.Stop();
+                        Defeat.Play();
+                        player.sprite.PlayAnimation(dieAnimation);
+                        dieTime = gameTime.TotalGameTime.TotalMilliseconds;
+                    }
+                }
+
+                if (player.sprite.Animation == dieAnimation && gameTime.TotalGameTime.TotalMilliseconds - dieTime > 300)
+                {
+                    GameState = STATE_GAMEOVER;
+                }
+
+                if (player.position.X >= (320 + 480) * 3 / 2 && player.position.X <= (320 + 480 + 160 - 32) * 3 / 2 && player.position.Y >= endHeight && player.position.Y <= endHeight + (160 - 32) * 3 / 2)
+                {
+                    player.velocity.X = 0;
+                    player.sprite.PlayAnimation(winAnimation);
+                    if (winTimeCount == false)
+                    {
+                        playerVictory.Play();
+                        winTime = gameTime.TotalGameTime.TotalMilliseconds;
+                        winTimeCount = true;
+                    }
+                    // GameState = STATE_GAMEWON;
+                }
+
+                Console.WriteLine(winTime);
+                if (player.sprite.Animation == winAnimation && gameTime.TotalGameTime.TotalMilliseconds - winTime > 100)
+>>>>>>> Stashed changes
                 {
                     GameState = STATE_GAMEWON;
                     // player.position.Y = endHeight+40;
@@ -592,7 +774,17 @@ namespace Tetris
             if (GameState == STATE_GAMEOVER)
             {
                 // Draw game over screen
+<<<<<<< Updated upstream
                 spriteBatch.DrawString(GameFont, "Game Over!", new Vector2(250, 210), Color.Red);
+=======
+                spriteBatch.DrawString(GameFont, "You Lose!", new Vector2(450*3/2, 30*3/2), Color.Red);
+                if (totalTime % 60 < 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : 0" + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                else if (totalTime % 60 >= 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : " + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                spriteBatch.DrawString(GameFont, "Lines: " + Lines, new Vector2(450 * 3 / 2, 190 * 3 / 2), Color.White);
+                spriteBatch.Draw(lose, new Rectangle(480 * 3 / 2, 260 * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
+>>>>>>> Stashed changes
             }
 
             // Display the debug Window
@@ -601,7 +793,17 @@ namespace Tetris
             if (GameState == STATE_GAMEWON)
             {
                 // Draw game over screen
+<<<<<<< Updated upstream
                 spriteBatch.DrawString(GameFont, "Game Won!", new Vector2(250, 210), Color.Yellow);
+=======
+                spriteBatch.DrawString(GameFont, "You Win!", new Vector2(450 * 3 / 2, 30 * 3 / 2), Color.Yellow);
+                if (totalTime % 60 < 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : 0" + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                else if (totalTime % 60 >= 10)
+                    spriteBatch.DrawString(GameFont, "Time: " + Math.Truncate(totalTime / 60) + " : " + Math.Round(totalTime % 60, 2, MidpointRounding.ToEven), new Vector2(450 * 3 / 2, 110 * 3 / 2), Color.White);
+                spriteBatch.DrawString(GameFont, "Lines: " + Lines, new Vector2(450 * 3 / 2, 190 * 3 / 2), Color.White);
+                spriteBatch.Draw(win, new Rectangle(480 * 3 / 2, 260 * 3 / 2, 160 * 3 / 2, 160 * 3 / 2), Color.White);
+>>>>>>> Stashed changes
             }
 
             spriteBatch.End();
@@ -681,6 +883,29 @@ namespace Tetris
                 (GraphicsDevice.Viewport.Width - texture.Width) / 2,
                 height
             );
+        }
+
+        protected void PlayMusic(int i)
+        {
+            if (currentMusic == i)
+            {
+                return;
+            }
+            switch (i)
+            {
+                case 0:
+                    currentMusic = 0;
+                    menuMusic.PlayLooping();
+                    break;
+                case 1:
+                    currentMusic = 1;
+                    gamePlayMusic.PlayLooping();
+                    break;
+                case 2:
+                    currentMusic = 2;
+                    gamePlayMusic.Stop();
+                    break;
+            }
         }
 
     }

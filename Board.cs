@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Tetris
 {
@@ -80,13 +81,15 @@ namespace Tetris
 
 
         // Return the number of rows cleaned
-        public int ClearRow()
+        public int ClearRow(SoundEffect lineCleared)
         {
+
             int rowCleared = 0;
             for (int y = 0; y < Height; y++)
             {
                 if (GetNumberOfBlockAtRow(y) >= Width)
                 {
+                    lineCleared.Play();
                     ClearRow(y);
                     y--;
                     rowCleared++;
