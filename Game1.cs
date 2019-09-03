@@ -220,7 +220,7 @@ namespace Tetris
             menuMusic = new SoundPlayer(path + @"\Content\Main_Menu_Music.wav");
             gamePlayMusic = new SoundPlayer(path + @"\Content\GamePlay.wav");
 
-            PlayMusic(0);
+            //PlayMusic(0);
         }
 
         protected override void UnloadContent()
@@ -250,6 +250,7 @@ namespace Tetris
             switch (GameState)
             {
                 case STATE_MENU:
+                    PlayMusic(0);
                     buttonResume.Disable(spriteBatch);
                     buttonRestart.Disable(spriteBatch);
                     if (Clicked(ref mouseState, buttonStart))
@@ -261,6 +262,7 @@ namespace Tetris
                         Exit();
                     break;
                 case STATE_PLAYING:
+                    PlayMusic(1);
                     buttonStart.Disable(spriteBatch);
                     buttonExit.Disable(spriteBatch);
                     buttonResume.Disable(spriteBatch);
@@ -369,7 +371,7 @@ namespace Tetris
                 }
 
                 // Tetromino generation
-                if ((currentTetromino == null || (!currentTetromino.IsFalling && gameTime.TotalGameTime.TotalMilliseconds - currentTetromino.TimeSinceStopFalling > 500)) && outOfStart == true)
+                if ((currentTetromino == null || !currentTetromino.IsFalling) && outOfStart == true)
                 {
                     currentTetromino = GenerateNewTetromino(nextTetrominos.Dequeue());
                     nextTetrominos.Enqueue(GetRandomCharacter(CHARLIST, randomGenerator));
@@ -543,7 +545,7 @@ namespace Tetris
                         player.position.Y = (20 - gameBoard.Blocks[player.collideBlock].Y) * 32 * 3 / 2;
                         player.velocity.Y = 0;
                         hasJumped = true;
-                        if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.IsFalling == true)
+                        if (belongToCurrent(gameBoard.Blocks[player.collideBlock]) && currentTetromino.CanMoveTo(currentTetromino.X, currentTetromino.Y - 1) == true)
                         {
                             // gamePlayMusic.Stop();
                             // Defeat.Play();
@@ -703,7 +705,7 @@ namespace Tetris
 
                 if (player.TopColliding(player.position.X, player.position.Y, gameBoard) == true)
                 {
-                    if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.IsFalling == true)
+                    if (belongToCurrent(gameBoard.Blocks[player.collideIndex]) && currentTetromino.CanMoveTo(currentTetromino.X, currentTetromino.Y - 1) == true)
                     {
                         playerDefeat.Play();
                         player.sprite.PlayAnimation(dieAnimation);

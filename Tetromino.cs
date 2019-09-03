@@ -195,14 +195,15 @@ namespace Tetris
             // If the tetromino cannot move or rotate
             if (!CanMoveTo(X, Y - 1))
             {
-                IsFalling = false;
-                if (fallTimeCount == false)
-                {
+                if (TimeSinceStopFalling == 0)
                     TimeSinceStopFalling = gameTime.TotalGameTime.TotalMilliseconds;
-                    fallTimeCount = true;
-                    if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling <= 500)
-                        IsSliding = true;
-                }
+                else if (gameTime.TotalGameTime.TotalMilliseconds - TimeSinceStopFalling > 300)
+                    IsFalling = false;
+            }
+            else
+            {
+                IsFalling = true;
+                TimeSinceStopFalling = 0;
             }
         }
 

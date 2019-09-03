@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Line-Climber-master/Content/Sound/SFX/Player_Victory.wav</SourceFile>
+  <SourceFile>C:/Users/ukjol/Desktop/LineClimberSoundFix/Content/Sound/SFX/Player_Victory.wav</SourceFile>
   <SourceTime>2019-09-02T19:23:10-06:00</SourceTime>
-  <DestFile>D:/Line-Climber-master/Content/bin/Windows/Content/Sound/SFX/Player_Victory.xnb</DestFile>
-  <DestTime>2019-09-03T00:37:28.0279602-06:00</DestTime>
+  <DestFile>C:/Users/ukjol/Desktop/LineClimberSoundFix/Content/bin/Windows/Content/Sound/SFX/Player_Victory.xnb</DestFile>
+  <DestTime>2019-09-03T09:54:24.1504584-06:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2018-12-08T09:35:54-07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
